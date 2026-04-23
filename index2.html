@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nithilan's Home Arsenal — 12 Week Transformation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   RESET + TOKENS
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* LIGHT THEME (default) */
+:root,
+[data-theme="light"]{
+  --bg: #faf7f0;
+  --surface: #ffffff;
+  --surface-2: #f2eee3;
+  --border: #e2ddd0;
+  --border-bright: #c8c2b3;
+  --text: #1a1a1a;
+  --text-dim: #4a4a45;
+  --text-muted: #8a8780;
+  --accent: #e8491d;
+  --accent-soft: #fce8e0;
+  --lime: #b8d624;
+  --cream: #1a1a1a;
+  --shadow: 0 1px 3px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.04);
+  --grain-opacity: .03;
+}
+
+/* DARK THEME */
+[data-theme="dark"]{
+  --bg: #0d0d0d;
+  --surface: #161616;
+  --surface-2: #1f1f1f;
+  --border: #2a2a2a;
+  --border-bright: #404040;
+  --text: #f5f2ea;
+  --text-dim: #b5b1a8;
+  --text-muted: #6a6760;
+  --accent: #ff5722;
+  --accent-soft: #2a1410;
+  --lime: #d5f432;
+  --cream: #f5f2ea;
+  --shadow: 0 1px 3px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.3);
+  --grain-opacity: .05;
+}
+
+:root{
+  --display: 'Bebas Neue', Impact, sans-serif;
+  --body: 'Manrope', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  font-weight:500;
+  font-size:16px;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  transition:background .3s ease, color .3s ease;
+}
+/* grain overlay */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity:var(--grain-opacity);
+  pointer-events:none;
+  z-index:100;
+  mix-blend-mode:multiply;
+}
+[data-theme="dark"] body::before{mix-blend-mode:overlay}
+
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+.wrap{max-width:1300px;margin:0 auto;padding:0 28px}
+section{padding:90px 0;border-top:1px solid var(--border);position:relative}
+section:first-of-type{border-top:none}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+nav.topbar{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.navrow{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;max-width:1300px;margin:0 auto;gap:20px}
+.brand{font-family:var(--display);font-size:24px;letter-spacing:1.2px;display:flex;align-items:center;gap:12px;color:var(--text)}
+.brand .dot{width:10px;height:10px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
+.brand small{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--text-muted);font-weight:400;margin-left:6px}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.navlinks{display:flex;gap:26px;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700}
+.navlinks a{color:var(--text-dim);transition:color .2s}
+.navlinks a:hover{color:var(--accent)}
+@media(max-width:900px){.navlinks{display:none}}
+
+.theme-toggle{
+  width:42px;height:42px;border:1px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .25s ease;
+  background:var(--surface);
+  flex-shrink:0;
+}
+.theme-toggle:hover{border-color:var(--accent);transform:rotate(20deg)}
+.theme-toggle svg{width:18px;height:18px;stroke:var(--text)}
+.theme-toggle .moon{display:none}
+.theme-toggle .sun{display:block}
+[data-theme="dark"] .theme-toggle .sun{display:none}
+[data-theme="dark"] .theme-toggle .moon{display:block}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{padding:80px 0 90px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:40px}
+.greeting{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;
+  opacity:0;animation:rise .7s .1s forwards;
+  font-weight:600;
+}
+.greeting .bar{width:50px;height:1px;background:var(--accent)}
+
+.hello{
+  font-family:var(--display);font-size:clamp(28px,4vw,46px);letter-spacing:1px;
+  color:var(--text-dim);margin-bottom:8px;
+  opacity:0;animation:rise .7s .15s forwards;
+}
+.hello em{color:var(--accent);font-style:normal}
+
+.hero h1{
+  font-family:var(--display);
+  font-size:clamp(64px,11vw,160px);
+  line-height:.85;
+  letter-spacing:-.01em;
+  margin-bottom:24px;
+  color:var(--text);
+}
+.hero h1 span{display:block;opacity:0;animation:rise .8s forwards}
+.hero h1 span:nth-child(1){animation-delay:.25s}
+.hero h1 span:nth-child(2){animation-delay:.4s;color:var(--accent)}
+.hero h1 span:nth-child(3){animation-delay:.55s}
+.hero .sub{
+  font-size:18px;max-width:620px;color:var(--text-dim);line-height:1.65;
+  opacity:0;animation:rise .8s .65s forwards;font-weight:500;
+}
+.hero .sub strong{color:var(--text);font-weight:700}
+
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--border);
+  background:var(--surface);
+  margin-top:64px;border-radius:4px;overflow:hidden;
+  opacity:0;animation:rise .8s .8s forwards;
+  box-shadow:var(--shadow);
+}
+.stat{padding:30px 26px;border-right:1px solid var(--border);position:relative;transition:background .2s}
+.stat:hover{background:var(--surface-2)}
+.stat:last-child{border-right:none}
+.stat-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;font-weight:600}
+.stat-val{font-family:var(--display);font-size:54px;line-height:1;color:var(--text)}
+.stat-val em{font-style:normal;color:var(--accent)}
+.stat-sub{font-size:12px;color:var(--text-dim);margin-top:8px;font-family:var(--mono);font-weight:500}
+@media(max-width:700px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--border)}
+}
+
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+.sec-head{display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:end;margin-bottom:48px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+@media(max-width:700px){.sec-head{grid-template-columns:1fr;gap:14px}}
+.sec-num{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:2px;font-weight:600}
+.sec-title{font-family:var(--display);font-size:clamp(46px,7vw,82px);line-height:.9;letter-spacing:-.005em;color:var(--text)}
+.sec-meta{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);text-align:right;font-weight:500;line-height:1.6}
+@media(max-width:700px){.sec-meta{text-align:left}}
+
+.sec-intro{font-size:16px;color:var(--text-dim);max-width:760px;margin-bottom:44px;line-height:1.7;font-weight:500}
+.sec-intro strong{color:var(--text);font-weight:700}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* =========================================================
+   EXERCISE CARDS
+   ========================================================= */
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:24px;
+  transition:all .25s ease;
+  position:relative;
+  overflow:hidden;
+  border-radius:4px;
+}
+.card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow)}
+.card::before{
+  content:"";position:absolute;top:0;left:0;width:0;height:2px;background:var(--accent);
+  transition:width .35s ease;
+}
+.card:hover::before{width:100%}
+.card .num{font-family:var(--mono);font-size:11px;color:var(--text-muted);letter-spacing:2px;font-weight:600}
+.card .name{font-family:var(--display);font-size:26px;letter-spacing:.5px;margin:8px 0 6px;color:var(--text)}
+.card .tag{display:inline-block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);font-family:var(--mono);margin-bottom:12px;font-weight:600;background:var(--accent-soft);padding:4px 10px;border-radius:3px}
+.card .desc{font-size:14px;color:var(--text-dim);line-height:1.6;font-weight:500}
+.card .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;font-family:var(--mono);font-size:10px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;font-weight:600}
+.card .meta span{padding:5px 9px;background:var(--surface-2);border:1px solid var(--border);border-radius:3px}
+
+/* muscle category blocks */
+.mgroup{margin-bottom:64px}
+.mgroup-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.mgroup-title{font-family:var(--display);font-size:42px;letter-spacing:1px;color:var(--text)}
+.mgroup-title em{font-style:normal;color:var(--accent)}
+.mgroup-count{font-family:var(--mono);font-size:12px;color:var(--text-muted);letter-spacing:2px;font-weight:600}
+
+/* =========================================================
+   SCHEDULE (weekly)
+   ========================================================= */
+.schedule{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:32px}
+@media(max-width:900px){.schedule{grid-template-columns:repeat(2,1fr)}}
+.day{
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:22px 18px;
+  min-height:220px;
+  position:relative;
+  transition:all .3s;
+  border-radius:4px;
+}
+.day:hover{border-color:var(--border-bright);box-shadow:var(--shadow);transform:translateY(-3px)}
+.day.rest{background:var(--surface-2);border-style:dashed;opacity:.85}
+.day.hit{border-left:3px solid var(--accent)}
+.day .dname{font-family:var(--display);font-size:26px;letter-spacing:1px;color:var(--text)}
+.day .dnum{font-family:var(--mono);font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-bottom:14px;font-weight:600}
+.day .focus{font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:1.2px;font-weight:700;margin-bottom:14px;font-family:var(--mono)}
+.day ul{list-style:none;font-size:13px;color:var(--text-dim);line-height:1.85;font-weight:500}
+.day li::before{content:"—";color:var(--accent);margin-right:6px;font-weight:700}
+
+/* 8-week program grid (4 cols, responsive) */
+.program-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:32px}
+@media(max-width:900px){.program-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.program-grid{grid-template-columns:1fr}}
+
+/* =========================================================
+   DIET PLAN
+   ========================================================= */
+.macros{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:50px;
+}
+@media(max-width:900px){.macros{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:500px){.macros{grid-template-columns:repeat(2,1fr)}}
+.macro{
+  background:var(--surface);border:1px solid var(--border);padding:22px 18px;
+  text-align:center;border-radius:4px;transition:all .25s;
+}
+.macro:hover{border-color:var(--accent);transform:translateY(-3px)}
+.macro-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;font-weight:600}
+.macro-val{font-family:var(--display);font-size:32px;line-height:1;color:var(--text)}
+.macro-val em{font-style:normal;color:var(--accent);font-size:18px;margin-left:4px}
+.macro-sub{font-size:11px;color:var(--text-dim);margin-top:6px;font-family:var(--mono);font-weight:500}
+
+/* meal blocks */
+.meal-day{
+  background:var(--surface);border:1px solid var(--border);padding:32px;border-radius:4px;
+  margin-bottom:18px;transition:all .25s;
+}
+.meal-day:hover{border-color:var(--border-bright);box-shadow:var(--shadow)}
+.meal-day-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:18px;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+.meal-day-title{font-family:var(--display);font-size:36px;color:var(--text);letter-spacing:1px}
+.meal-day-title em{font-style:normal;color:var(--accent)}
+.meal-day-tot{font-family:var(--mono);font-size:11px;color:var(--text-muted);letter-spacing:2px;font-weight:600}
+.meal-day-tot strong{color:var(--text);font-weight:700}
+
+.meal{display:grid;grid-template-columns:auto 1fr auto;gap:24px;padding:18px 0;border-bottom:1px solid var(--border);align-items:start}
+.meal:last-child{border-bottom:none}
+@media(max-width:700px){.meal{grid-template-columns:1fr;gap:8px}}
+.meal-time{
+  font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:1px;font-weight:700;
+  background:var(--accent-soft);padding:6px 12px;border-radius:3px;
+  min-width:90px;text-align:center;
+  height:fit-content;
+}
+.meal-info h4{font-family:var(--display);font-size:22px;color:var(--text);letter-spacing:.5px;margin-bottom:4px}
+.meal-info .items{font-size:14.5px;color:var(--text-dim);line-height:1.65;font-weight:500}
+.meal-info .items strong{color:var(--text);font-weight:700}
+.meal-macro{
+  font-family:var(--mono);font-size:11px;color:var(--text-muted);letter-spacing:1px;
+  text-align:right;line-height:1.7;font-weight:600;min-width:80px;
+}
+.meal-macro strong{color:var(--text)}
+
+/* food lists */
+.food-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+@media(max-width:700px){.food-cols{grid-template-columns:1fr}}
+.food-list{
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:28px;
+}
+.food-list.eat{border-left:3px solid var(--lime)}
+.food-list.limit{border-left:3px solid var(--accent)}
+.food-list h4{
+  font-family:var(--display);font-size:22px;letter-spacing:1px;margin-bottom:18px;color:var(--text);
+  display:flex;align-items:center;gap:10px;
+}
+.food-list h4 .badge{font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:4px 10px;border-radius:3px;font-weight:700}
+.food-list.eat .badge{background:var(--lime);color:#1a1a1a}
+.food-list.limit .badge{background:var(--accent);color:#fff}
+.food-list ul{list-style:none}
+.food-list li{padding:10px 0;border-bottom:1px solid var(--border);font-size:14.5px;color:var(--text-dim);font-weight:500;line-height:1.5}
+.food-list li:last-child{border-bottom:none}
+.food-list li strong{color:var(--text);font-weight:700}
+
+/* protein chart */
+.protein-table{
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  overflow:hidden;margin-top:36px;
+}
+.protein-row{
+  display:grid;grid-template-columns:1fr auto auto;gap:20px;
+  padding:16px 24px;border-bottom:1px solid var(--border);
+  font-size:14.5px;font-weight:500;
+  align-items:center;
+  transition:background .15s;
+}
+.protein-row:hover{background:var(--surface-2)}
+.protein-row:last-child{border-bottom:none}
+.protein-row.head{background:var(--surface-2);font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);font-weight:700}
+.protein-row .name{color:var(--text);font-weight:600}
+.protein-row .amt{color:var(--text-dim);text-align:right;font-family:var(--mono);font-weight:500}
+.protein-row .pro{color:var(--accent);font-family:var(--display);font-size:24px;text-align:right;letter-spacing:.5px}
+.protein-row.head .pro{color:var(--text-muted);font-family:var(--mono);font-size:11px}
+
+/* =========================================================
+   FASTING
+   ========================================================= */
+.fast-methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:36px}
+.fast-card{
+  background:var(--surface);border:1px solid var(--border);padding:28px;border-radius:4px;
+  position:relative;transition:all .25s;overflow:hidden;
+}
+.fast-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:var(--shadow)}
+.fast-card.recommended{border-color:var(--accent);background:linear-gradient(135deg, var(--surface), var(--accent-soft) 200%)}
+.fast-card.recommended::after{
+  content:"RECOMMENDED";position:absolute;top:14px;right:-30px;
+  background:var(--accent);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:2px;font-weight:700;
+  padding:4px 36px;transform:rotate(35deg);
+}
+.fast-name{font-family:var(--display);font-size:42px;letter-spacing:1px;color:var(--text);line-height:1;margin-bottom:6px}
+.fast-name em{color:var(--accent);font-style:normal}
+.fast-level{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--accent);font-weight:600;margin-bottom:14px;display:inline-block}
+.fast-window{font-family:var(--mono);font-size:13px;color:var(--text-dim);margin-bottom:14px;font-weight:500}
+.fast-desc{font-size:14px;color:var(--text-dim);line-height:1.6;font-weight:500}
+.fast-pros{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:12.5px;color:var(--text-dim);font-weight:500}
+.fast-pros strong{color:var(--text);font-weight:700;display:block;margin-bottom:4px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px}
+
+/* fasting day timeline */
+.timeline{
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  padding:36px;margin-top:36px;
+}
+.timeline h3{font-family:var(--display);font-size:32px;letter-spacing:1px;margin-bottom:8px;color:var(--text)}
+.timeline .sub{font-family:var(--mono);font-size:11px;color:var(--text-muted);letter-spacing:1.5px;margin-bottom:32px;font-weight:600}
+.tl-item{display:grid;grid-template-columns:80px 24px 1fr;gap:20px;padding:16px 0;align-items:start}
+@media(max-width:600px){.tl-item{grid-template-columns:60px 20px 1fr;gap:14px}}
+.tl-time{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--text)}
+.tl-dot{
+  width:14px;height:14px;border-radius:50%;background:var(--surface);
+  border:2px solid var(--accent);margin-top:5px;position:relative;
+}
+.tl-dot.fast{background:var(--accent)}
+.tl-dot::after{content:"";position:absolute;top:14px;left:5px;width:2px;height:36px;background:var(--border)}
+.tl-item:last-child .tl-dot::after{display:none}
+.tl-info h5{font-family:var(--display);font-size:20px;letter-spacing:.5px;color:var(--text);margin-bottom:2px}
+.tl-info p{font-size:14px;color:var(--text-dim);line-height:1.55;font-weight:500}
+.tl-info .label{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:1.5px;padding:2px 8px;border-radius:2px;font-weight:700;margin-bottom:4px}
+.tl-info .label.fasting{background:var(--accent-soft);color:var(--accent)}
+.tl-info .label.eating{background:#e0f7c4;color:#5a7a00}
+[data-theme="dark"] .tl-info .label.eating{background:#2a3300;color:#b8d624}
+
+/* fasting do/dont */
+.fast-rules{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+@media(max-width:700px){.fast-rules{grid-template-columns:1fr}}
+.rule-box{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:28px}
+.rule-box h4{font-family:var(--display);font-size:24px;letter-spacing:1px;margin-bottom:16px;color:var(--text)}
+.rule-box.yes h4{color:var(--text)}
+.rule-box.yes h4::before{content:"✓ ";color:#4a8b00;font-weight:700}
+.rule-box.no h4::before{content:"✗ ";color:var(--accent);font-weight:700}
+[data-theme="dark"] .rule-box.yes h4::before{color:#b8d624}
+.rule-box ul{list-style:none}
+.rule-box li{padding:8px 0;font-size:14.5px;color:var(--text-dim);font-weight:500;border-bottom:1px solid var(--border)}
+.rule-box li:last-child{border-bottom:none}
+
+/* warning callout */
+.callout{
+  background:var(--accent-soft);border-left:4px solid var(--accent);
+  padding:24px 28px;border-radius:4px;margin-top:36px;
+}
+.callout h4{font-family:var(--display);font-size:24px;letter-spacing:1px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.callout p{font-size:14.5px;color:var(--text-dim);line-height:1.65;font-weight:500}
+.callout p strong{color:var(--text);font-weight:700}
+
+/* =========================================================
+   PRINCIPLES / PULL QUOTES
+   ========================================================= */
+.principles{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:32px;
+  border:1px solid var(--border);border-radius:4px;background:var(--surface);overflow:hidden;
+}
+@media(max-width:900px){.principles{grid-template-columns:1fr}}
+.principle{padding:36px 30px;border-right:1px solid var(--border);transition:background .25s}
+.principle:last-child{border-right:none}
+@media(max-width:900px){
+  .principle{border-right:none;border-bottom:1px solid var(--border)}
+  .principle:last-child{border-bottom:none}
+}
+.principle:hover{background:var(--surface-2)}
+.principle-num{font-family:var(--display);font-size:64px;color:var(--accent);line-height:1;margin-bottom:16px;display:block}
+.principle h3{font-family:var(--display);font-size:24px;letter-spacing:.5px;margin-bottom:12px;color:var(--text)}
+.principle p{color:var(--text-dim);font-size:14.5px;line-height:1.65;font-weight:500}
+
+/* =========================================================
+   MARQUEE
+   ========================================================= */
+.marquee{
+  overflow:hidden;white-space:nowrap;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:22px 0;background:var(--surface-2);
+}
+.marquee-track{display:inline-block;animation:scroll 35s linear infinite}
+.marquee span{font-family:var(--display);font-size:42px;letter-spacing:2px;color:var(--text);padding:0 36px}
+.marquee span em{color:var(--accent);font-style:normal}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer{padding:60px 0 40px;border-top:1px solid var(--border);color:var(--text-muted);background:var(--surface-2)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
+@media(max-width:700px){.foot-grid{grid-template-columns:1fr}}
+.foot-grid h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text);margin-bottom:16px;font-weight:700}
+.foot-grid p,.foot-grid li{font-size:14px;line-height:1.85;color:var(--text-dim);font-weight:500}
+.foot-grid ul{list-style:none}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--text-muted);font-weight:600;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="topbar">
+  <div class="navrow">
+    <div class="brand"><span class="dot"></span>NITHILAN'S ARSENAL <small>v1.1</small></div>
+    <div class="navlinks">
+      <a href="#warmup">Warmup</a>
+      <a href="#cardio">Cardio</a>
+      <a href="#library">Library</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#diet">Diet</a>
+      <a href="#fasting">Fasting</a>
+      <a href="#vitality">Vitality</a>
+      <a href="#stamina">Stamina</a>
+      <a href="#cooldown">Cool Down</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <div class="greeting"><span class="bar"></span>12 WEEK PROTOCOL · NO EQUIPMENT · VEGETARIAN</div>
+      <p class="hello">Welcome back, <em>Nithilan</em>.</p>
+      <h1>
+        <span>STOP</span>
+        <span>THE BELLY.</span>
+        <span>START HERE.</span>
+      </h1>
+      <p class="sub">Your home training system, built for a <strong>returning lifter</strong>. Yoga mat, bodyweight, a backpack full of books, a sturdy chair. No gym, no excuses, no 90-minute sessions. Just the movements that actually shift the needle — paired with a clean vegetarian diet plan and an intermittent fasting protocol you can sustain.</p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Starting weight</div>
+      <div class="stat-val">89<em>kg</em></div>
+      <div class="stat-sub">target 81 kg</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Height</div>
+      <div class="stat-val">184<em>cm</em></div>
+      <div class="stat-sub">bmi 26.3</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Sessions / week</div>
+      <div class="stat-val">5</div>
+      <div class="stat-sub">35 min avg</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Protocol</div>
+      <div class="stat-val">12<em>wk</em></div>
+      <div class="stat-sub">fat loss + strength</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ WARMUP ============ -->
+<section id="warmup">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 01</div>
+      <div class="sec-title">WARM<br>THE ENGINE</div>
+      <div class="sec-meta">5–8 MIN / DYNAMIC<br>EVERY SESSION</div>
+    </div>
+
+    <p class="sec-intro reveal">Skip this and your first working set becomes your warmup. <strong>Dynamic only</strong> — no static stretching before lifting. Move through these in order. Flow, don't pause.</p>
+
+    <div class="ex-grid reveal">
+      <div class="card"><div class="num">W/01</div><div class="name">Jumping Jacks</div><div class="tag">Full body · Heart rate</div><div class="desc">Classic opener. Elevates core temperature fast. Arms fully overhead, feet wide.</div><div class="meta"><span>60 SEC</span></div></div>
+      <div class="card"><div class="num">W/02</div><div class="name">Arm Circles</div><div class="tag">Shoulders · Mobility</div><div class="desc">Ten forward, ten backward. Start small, grow to full range.</div><div class="meta"><span>10+10</span></div></div>
+      <div class="card"><div class="num">W/03</div><div class="name">Shoulder Rolls</div><div class="tag">Traps · Neck</div><div class="desc">Slow rolls, each direction. Focus on squeezing shoulder blades at the back.</div><div class="meta"><span>10+10</span></div></div>
+      <div class="card"><div class="num">W/04</div><div class="name">Hip Circles</div><div class="tag">Hip mobility</div><div class="desc">Hands on hips, draw large circles. Essential before any lower-body work.</div><div class="meta"><span>10+10</span></div></div>
+      <div class="card"><div class="num">W/05</div><div class="name">Leg Swings</div><div class="tag">Hips · Hamstrings</div><div class="desc">Hold wall for balance. Front-back swings, then side-to-side. Don't force range.</div><div class="meta"><span>10/LEG</span></div></div>
+      <div class="card"><div class="num">W/06</div><div class="name">Torso Twists</div><div class="tag">Thoracic spine</div><div class="desc">Feet shoulder-width, arms loose, rotate through the core. Helps rotational strength.</div><div class="meta"><span>15 REPS</span></div></div>
+      <div class="card"><div class="num">W/07</div><div class="name">Cat–Cow</div><div class="tag">Spine · Mat</div><div class="desc">All fours. Arch up, round down. Controls the full spine — non-negotiable for desk workers.</div><div class="meta"><span>10 REPS</span></div></div>
+      <div class="card"><div class="num">W/08</div><div class="name">Inchworms</div><div class="tag">Hamstrings · Core</div><div class="desc">Bend, walk hands forward to plank, walk back. Lubricates the posterior chain.</div><div class="meta"><span>8 REPS</span></div></div>
+      <div class="card"><div class="num">W/09</div><div class="name">World's Greatest Stretch</div><div class="tag">Hips · T-spine</div><div class="desc">Deep lunge, opposite hand to floor, other arm reaches up with rotation. Game changer.</div><div class="meta"><span>5/SIDE</span></div></div>
+      <div class="card"><div class="num">W/10</div><div class="name">Walkouts</div><div class="tag">Full body</div><div class="desc">Fold forward, walk out to plank, walk back. Primes shoulders and core simultaneously.</div><div class="meta"><span>8 REPS</span></div></div>
+      <div class="card"><div class="num">W/11</div><div class="name">Bodyweight Squats</div><div class="tag">Glute activation</div><div class="desc">Slow, deep, controlled. Last warmup move before working sets.</div><div class="meta"><span>15 REPS</span></div></div>
+      <div class="card"><div class="num">W/12</div><div class="name">Scapular Push-ups</div><div class="tag">Shoulder prep</div><div class="desc">Plank position, retract and protract shoulder blades only — arms stay straight.</div><div class="meta"><span>10 REPS</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>SHOW UP ANYWAY · <em>REST IS A TOOL</em> · PROGRESS > PERFECTION · <em>MOVE EVERY DAY</em> · PROTEIN FIRST · <em>SLEEP IS TRAINING</em> · SHOW UP ANYWAY · <em>REST IS A TOOL</em> · PROGRESS > PERFECTION · <em>MOVE EVERY DAY</em> · PROTEIN FIRST · <em>SLEEP IS TRAINING</em> · </span>
+  </div>
+</div>
+
+<!-- ============ CARDIO ============ -->
+<section id="cardio">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 02</div>
+      <div class="sec-title">CARDIO<br>&amp; HIIT</div>
+      <div class="sec-meta">FAT BURN / CONDITIONING<br>20–25 MIN SESSIONS</div>
+    </div>
+
+    <p class="sec-intro reveal">Use these in HIIT circuits: <strong>30 sec work / 30 sec rest, 4–6 rounds</strong>. Or mix 4–5 into a continuous 15-minute flow. Belly fat responds best to intervals + daily steps, not steady-state only.</p>
+
+    <div class="ex-grid reveal">
+      <div class="card"><div class="num">C/01</div><div class="name">Jumping Jacks</div><div class="tag">Low impact · Cardio</div><div class="desc">Baseline. Safe for most joints. Keeps heart rate in zone 2.</div><div class="meta"><span>30–60 S</span></div></div>
+      <div class="card"><div class="num">C/02</div><div class="name">High Knees</div><div class="tag">Hip flexors · HR spike</div><div class="desc">Drive knees to waist height. Don't shuffle — explode up.</div><div class="meta"><span>30 S</span></div></div>
+      <div class="card"><div class="num">C/03</div><div class="name">Butt Kicks</div><div class="tag">Hamstrings · Cardio</div><div class="desc">Heel to glute, light on forefoot. Great pair with high knees.</div><div class="meta"><span>30 S</span></div></div>
+      <div class="card"><div class="num">C/04</div><div class="name">Mountain Climbers</div><div class="tag">Core · Cardio</div><div class="desc">Plank hands, drive knees alternately. Hips stay low, back flat.</div><div class="meta"><span>30–45 S</span></div></div>
+      <div class="card"><div class="num">C/05</div><div class="name">Burpees</div><div class="tag">Full body · High output</div><div class="desc">Squat, plank, push-up, jump. The king of HIIT. Scale down if needed.</div><div class="meta"><span>10 REPS</span></div></div>
+      <div class="card"><div class="num">C/06</div><div class="name">Half Burpees</div><div class="tag">Scaled version</div><div class="desc">Skip push-up and jump. Same conditioning, gentler on shoulders.</div><div class="meta"><span>15 REPS</span></div></div>
+      <div class="card"><div class="num">C/07</div><div class="name">Jump Squats</div><div class="tag">Legs · Plyometric</div><div class="desc">Full squat, explode vertically, land soft. Torches quads.</div><div class="meta"><span>15 REPS</span></div></div>
+      <div class="card"><div class="num">C/08</div><div class="name">Squat Jacks</div><div class="tag">Legs · Cardio hybrid</div><div class="desc">Jumping jack legs, but stay low in a squat. Cruel and effective.</div><div class="meta"><span>20 REPS</span></div></div>
+      <div class="card"><div class="num">C/09</div><div class="name">Skater Hops</div><div class="tag">Lateral · Glutes</div><div class="desc">Bound side to side, land on outside leg. Builds lateral stability.</div><div class="meta"><span>20 REPS</span></div></div>
+      <div class="card"><div class="num">C/10</div><div class="name">Plank Jacks</div><div class="tag">Core · Cardio</div><div class="desc">Hold plank, jump feet apart and together. Hips don't rise.</div><div class="meta"><span>30 S</span></div></div>
+      <div class="card"><div class="num">C/11</div><div class="name">Star Jumps</div><div class="tag">Explosive</div><div class="desc">Squat, jump up wide like a star. More intense than a jumping jack.</div><div class="meta"><span>15 REPS</span></div></div>
+      <div class="card"><div class="num">C/12</div><div class="name">Cross Jacks</div><div class="tag">Coordination</div><div class="desc">Jumping jacks but cross arms and legs alternately. Sneaky oblique work.</div><div class="meta"><span>30 S</span></div></div>
+      <div class="card"><div class="num">C/13</div><div class="name">Tuck Jumps</div><div class="tag">Power · Advanced</div><div class="desc">Jump, bring knees to chest, land soft. Brutal for fat loss.</div><div class="meta"><span>10 REPS</span></div></div>
+      <div class="card"><div class="num">C/14</div><div class="name">Shadow Boxing</div><div class="tag">Arms · Cardio · Stress</div><div class="desc">Move, punch, duck, pivot. 2–3 minute rounds. Therapeutic and effective.</div><div class="meta"><span>2 MIN</span></div></div>
+      <div class="card"><div class="num">C/15</div><div class="name">Frog Jumps</div><div class="tag">Power · Legs</div><div class="desc">Squat deep, leap forward, land in squat. Covers distance, builds explosiveness.</div><div class="meta"><span>10 REPS</span></div></div>
+      <div class="card"><div class="num">C/16</div><div class="name">Bear Crawl</div><div class="tag">Core · Shoulders</div><div class="desc">Knees hover just off ground. Crawl forward/back. Hidden cardio monster.</div><div class="meta"><span>30 S</span></div></div>
+      <div class="card"><div class="num">C/17</div><div class="name">Crab Walk</div><div class="tag">Posterior · Fun</div><div class="desc">Seated, lift hips, walk on hands + feet. Glutes and triceps fire.</div><div class="meta"><span>30 S</span></div></div>
+      <div class="card"><div class="num">C/18</div><div class="name">Running in Place</div><div class="tag">Zone 2 · Easy cardio</div><div class="desc">Low intensity. Can do while watching something. Burns ~300 kcal in 30 min.</div><div class="meta"><span>10–30 MIN</span></div></div>
+      <div class="card"><div class="num">C/19</div><div class="name">Jump Rope Mimic</div><div class="tag">Ankles · Calves</div><div class="desc">Same motion, no rope. Rhythm matters. Builds crazy endurance.</div><div class="meta"><span>60 S</span></div></div>
+      <div class="card"><div class="num">C/20</div><div class="name">Stair Runs</div><div class="tag">If available · Elite</div><div class="desc">Up and down the staircase, 10–15 rounds. Nothing else touches this for conditioning.</div><div class="meta"><span>10 ROUNDS</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIBRARY ============ -->
+<section id="library">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 03</div>
+      <div class="sec-title">EXERCISE<br>LIBRARY</div>
+      <div class="sec-meta">90+ MOVEMENTS<br>BY MUSCLE GROUP</div>
+    </div>
+
+    <p class="sec-intro reveal">Organised by muscle group, easy to hard. You have gym experience — use it. Start 2 levels below your old gym strength and progress every 2 weeks.</p>
+
+    <!-- ===== CHEST ===== -->
+    <div class="mgroup reveal">
+      <div class="mgroup-head">
+        <div class="mgroup-title">CHEST <em>/</em> PUSH</div>
+        <div class="mgroup-count">14 MOVEMENTS</div>
+      </div>
+      <div class="ex-grid">
+        <div class="card"><div class="num">CH/01</div><div class="name">Wall Push-up</div><div class="tag">Beginner</div><div class="desc">Regression for rebuilding after layoff. Hands on wall, step back.</div><div class="meta"><span>3×15</span></div></div>
+        <div class="card"><div class="num">CH/02</div><div class="name">Incline Push-up</div><div class="tag">Entry</div><div class="desc">Hands on chair or counter. Easier than standard. 2 cm higher = 10% easier.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">CH/03</div><div class="name">Knee Push-up</div><div class="tag">Transition</div><div class="desc">Drop knees to mat. Still hits the chest fully — don't skip.</div><div class="meta"><span>3×15</span></div></div>
+        <div class="card"><div class="num">CH/04</div><div class="name">Standard Push-up</div><div class="tag">Foundation</div><div class="desc">Straight body, elbows 45°. Every rep clean and full range.</div><div class="meta"><span>4×10</span></div></div>
+        <div class="card"><div class="num">CH/05</div><div class="name">Wide Push-up</div><div class="tag">Outer chest</div><div class="desc">Hands 1.5x shoulder width. More pec, less triceps.</div><div class="meta"><span>3×10</span></div></div>
+        <div class="card"><div class="num">CH/06</div><div class="name">Diamond Push-up</div><div class="tag">Triceps · Inner chest</div><div class="desc">Hands form diamond under chest. Brutal for triceps.</div><div class="meta"><span>3×8</span></div></div>
+        <div class="card"><div class="num">CH/07</div><div class="name">Decline Push-up</div><div class="tag">Upper chest</div><div class="desc">Feet on chair. Hits the clavicle head of the pec. Much harder.</div><div class="meta"><span>3×10</span></div></div>
+        <div class="card"><div class="num">CH/08</div><div class="name">Staggered Push-up</div><div class="tag">Unilateral</div><div class="desc">One hand forward, one back. Exposes weak side. Alternate sets.</div><div class="meta"><span>3×8/side</span></div></div>
+        <div class="card"><div class="num">CH/09</div><div class="name">Spiderman Push-up</div><div class="tag">Core + chest</div><div class="desc">Bring knee to elbow as you lower. Obliques fire hard.</div><div class="meta"><span>3×8/side</span></div></div>
+        <div class="card"><div class="num">CH/10</div><div class="name">Archer Push-up</div><div class="tag">Advanced</div><div class="desc">Shift weight to one side, other arm extends. Stepping stone to one-arm.</div><div class="meta"><span>3×5/side</span></div></div>
+        <div class="card"><div class="num">CH/11</div><div class="name">Hindu Push-up</div><div class="tag">Flow · Mobility</div><div class="desc">Dive down then scoop up to cobra. Shoulder, chest, hip, spine all at once.</div><div class="meta"><span>3×10</span></div></div>
+        <div class="card"><div class="num">CH/12</div><div class="name">Plyo Push-up</div><div class="tag">Power</div><div class="desc">Explode off the ground, land soft. Optional: clap. Power + strength.</div><div class="meta"><span>3×6</span></div></div>
+        <div class="card"><div class="num">CH/13</div><div class="name">T Push-up</div><div class="tag">Rotation · Core</div><div class="desc">After each push-up rotate to side plank, arm to ceiling. Phenomenal core work.</div><div class="meta"><span>3×6/side</span></div></div>
+        <div class="card"><div class="num">CH/14</div><div class="name">One-Arm Progression</div><div class="tag">Elite</div><div class="desc">Wide stance, opposite hand assisted, work toward freestanding. Months of work.</div><div class="meta"><span>Practice</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===== BACK ===== -->
+    <div class="mgroup reveal">
+      <div class="mgroup-head">
+        <div class="mgroup-title">BACK <em>/</em> PULL</div>
+        <div class="mgroup-count">12 MOVEMENTS</div>
+      </div>
+      <div class="ex-grid">
+        <div class="card"><div class="num">BK/01</div><div class="name">Superman</div><div class="tag">Lower back · Mat</div><div class="desc">Face down, lift arms and legs. Hold 2 sec at top. Essential posterior activation.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">BK/02</div><div class="name">Reverse Snow Angels</div><div class="tag">Upper back · Rear delts</div><div class="desc">Face down, arms sweep from hips to overhead and back. Slow and controlled.</div><div class="meta"><span>3×10</span></div></div>
+        <div class="card"><div class="num">BK/03</div><div class="name">YTW Raises</div><div class="tag">Upper back · Posture</div><div class="desc">Face down. Arms in Y, T, then W shape. Kills upper-back weakness.</div><div class="meta"><span>3×8 each</span></div></div>
+        <div class="card"><div class="num">BK/04</div><div class="name">Prone Cobra</div><div class="tag">Isometric · Back</div><div class="desc">Chest off ground, arms out wide palms up, squeeze everything. Hold.</div><div class="meta"><span>3×30 S</span></div></div>
+        <div class="card"><div class="num">BK/05</div><div class="name">Bird Dog</div><div class="tag">Core · Back stabilizer</div><div class="desc">All fours. Opposite arm and leg extend, hold 3 sec. King of lower-back rehab.</div><div class="meta"><span>3×10/side</span></div></div>
+        <div class="card"><div class="num">BK/06</div><div class="name">Swimmers</div><div class="tag">Lower back</div><div class="desc">Prone, alternate arms and legs in a flutter. Endurance for erector spinae.</div><div class="meta"><span>3×30 S</span></div></div>
+        <div class="card"><div class="num">BK/07</div><div class="name">Towel Row (Door)</div><div class="tag">Lats · Biceps</div><div class="desc">Loop towel around door handle, lean back, pull chest toward door. Legs control intensity.</div><div class="meta"><span>4×10</span></div></div>
+        <div class="card"><div class="num">BK/08</div><div class="name">Inverted Row (Table)</div><div class="tag">Mid-back</div><div class="desc">Lie under sturdy table, grip edge, pull chest up. Your best pull replacement.</div><div class="meta"><span>4×8</span></div></div>
+        <div class="card"><div class="num">BK/09</div><div class="name">Renegade Row</div><div class="tag">Backpack · Core</div><div class="desc">Plank, one arm rows backpack up. Anti-rotation core plus back.</div><div class="meta"><span>3×8/side</span></div></div>
+        <div class="card"><div class="num">BK/10</div><div class="name">Scapular Retractions</div><div class="tag">Mobility</div><div class="desc">Standing or on wall, pull shoulder blades together hard. Fixes desk posture.</div><div class="meta"><span>3×15</span></div></div>
+        <div class="card"><div class="num">BK/11</div><div class="name">Reverse Hyper</div><div class="tag">Glutes · Lower back</div><div class="desc">Hips on edge of bed, legs hang, lift up. Gentle on spine, great for glutes.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">BK/12</div><div class="name">W-Raises</div><div class="tag">Posture</div><div class="desc">Standing, arms in W shape, elbows squeeze back. Great desk-job antidote.</div><div class="meta"><span>3×15</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===== SHOULDERS ===== -->
+    <div class="mgroup reveal">
+      <div class="mgroup-head">
+        <div class="mgroup-title">SHOULDERS</div>
+        <div class="mgroup-count">10 MOVEMENTS</div>
+      </div>
+      <div class="ex-grid">
+        <div class="card"><div class="num">SH/01</div><div class="name">Pike Push-up</div><div class="tag">Front delts</div><div class="desc">Downward dog position. Lower head toward floor. Vertical push pattern.</div><div class="meta"><span>4×8</span></div></div>
+        <div class="card"><div class="num">SH/02</div><div class="name">Elevated Pike Push-up</div><div class="tag">Harder</div><div class="desc">Feet on chair, pike position. Closer to vertical — closer to handstand press.</div><div class="meta"><span>3×8</span></div></div>
+        <div class="card"><div class="num">SH/03</div><div class="name">Wall Walks</div><div class="tag">Handstand prep</div><div class="desc">Start plank facing away from wall, walk feet up. Build shoulder endurance.</div><div class="meta"><span>3×3</span></div></div>
+        <div class="card"><div class="num">SH/04</div><div class="name">Wall Handstand Hold</div><div class="tag">Isometric</div><div class="desc">Kick up, hold 20–45 sec. Massive shoulder stability.</div><div class="meta"><span>3×30 S</span></div></div>
+        <div class="card"><div class="num">SH/05</div><div class="name">Handstand Push-up</div><div class="tag">Advanced</div><div class="desc">Wall-supported, lower head, push up. Build this slowly over months.</div><div class="meta"><span>3×3–5</span></div></div>
+        <div class="card"><div class="num">SH/06</div><div class="name">Plank to Down Dog</div><div class="tag">Dynamic</div><div class="desc">Plank → pike (hips up) → plank. Rhythmic shoulder conditioning.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">SH/07</div><div class="name">Dive Bomber</div><div class="tag">Flow</div><div class="desc">Hindu push-up variation, sweep down under imaginary fence. Full shoulder girdle.</div><div class="meta"><span>3×8</span></div></div>
+        <div class="card"><div class="num">SH/08</div><div class="name">Lateral Raise (Backpack)</div><div class="tag">Side delts</div><div class="desc">Load backpack in each hand or use water bottles. Slow raises, 3-sec down.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">SH/09</div><div class="name">Front Raise (Loaded)</div><div class="tag">Front delts</div><div class="desc">Backpack held at waist, raise to shoulder height. Control the descent.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">SH/10</div><div class="name">Rear Delt Fly (Mat)</div><div class="tag">Rear delts · Posture</div><div class="desc">Face down on mat, arms out to sides with water bottles, lift and squeeze.</div><div class="meta"><span>3×12</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===== LEGS ===== -->
+    <div class="mgroup reveal">
+      <div class="mgroup-head">
+        <div class="mgroup-title">LEGS <em>/</em> QUADS, HAMS, GLUTES</div>
+        <div class="mgroup-count">20 MOVEMENTS</div>
+      </div>
+      <div class="ex-grid">
+        <div class="card"><div class="num">LG/01</div><div class="name">Bodyweight Squat</div><div class="tag">Foundation</div><div class="desc">Below parallel, chest up, knees track toes. Still the gold standard.</div><div class="meta"><span>4×15</span></div></div>
+        <div class="card"><div class="num">LG/02</div><div class="name">Sumo Squat</div><div class="tag">Inner thighs · Glutes</div><div class="desc">Feet wide, toes out 30°. Emphasises adductors and glutes.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">LG/03</div><div class="name">Loaded Squat (Backpack)</div><div class="tag">Strength</div><div class="desc">Backpack front-loaded. 10–20 kg of books gives real strength stimulus.</div><div class="meta"><span>4×10</span></div></div>
+        <div class="card"><div class="num">LG/04</div><div class="name">Jump Squat</div><div class="tag">Power · Fat burn</div><div class="desc">Descend controlled, explode up, land soft. Phenomenal calorie burner.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">LG/05</div><div class="name">Pulse Squat</div><div class="tag">Endurance</div><div class="desc">Hold bottom, pulse 3 inches. Burns quads without much impact.</div><div class="meta"><span>3×20</span></div></div>
+        <div class="card"><div class="num">LG/06</div><div class="name">Bulgarian Split Squat</div><div class="tag">Unilateral · Essential</div><div class="desc">Rear foot on chair, front leg does work. One of the best leg builders, period.</div><div class="meta"><span>4×10/leg</span></div></div>
+        <div class="card"><div class="num">LG/07</div><div class="name">Split Squat</div><div class="tag">Stability</div><div class="desc">Static lunge position, knee to ground. Easier version of Bulgarian.</div><div class="meta"><span>3×12/leg</span></div></div>
+        <div class="card"><div class="num">LG/08</div><div class="name">Forward Lunge</div><div class="tag">Quads</div><div class="desc">Step forward, knee taps ground, push back. Load with backpack when ready.</div><div class="meta"><span>3×12/leg</span></div></div>
+        <div class="card"><div class="num">LG/09</div><div class="name">Reverse Lunge</div><div class="tag">Glutes · Knee-friendly</div><div class="desc">Step back instead of forward. Less knee strain, more glute.</div><div class="meta"><span>3×12/leg</span></div></div>
+        <div class="card"><div class="num">LG/10</div><div class="name">Walking Lunge</div><div class="tag">Conditioning</div><div class="desc">Continuous lunges across room. Brutal for quads and cardio combined.</div><div class="meta"><span>3×20 steps</span></div></div>
+        <div class="card"><div class="num">LG/11</div><div class="name">Jump Lunge</div><div class="tag">Plyo · Advanced</div><div class="desc">Lunge, explode up, switch legs mid-air, land in other lunge. Ruthless.</div><div class="meta"><span>3×10/side</span></div></div>
+        <div class="card"><div class="num">LG/12</div><div class="name">Cossack Squat</div><div class="tag">Mobility + strength</div><div class="desc">Wide stance, shift weight fully to one side. Opens hips, strong adductor work.</div><div class="meta"><span>3×8/side</span></div></div>
+        <div class="card"><div class="num">LG/13</div><div class="name">Pistol Squat</div><div class="tag">Elite</div><div class="desc">One-leg squat all the way down. Start with assisted or to a chair.</div><div class="meta"><span>3×5/leg</span></div></div>
+        <div class="card"><div class="num">LG/14</div><div class="name">Wall Sit</div><div class="tag">Isometric · Endurance</div><div class="desc">Back to wall, thighs parallel. Quads burn. Builds insane mental toughness.</div><div class="meta"><span>3×45 S</span></div></div>
+        <div class="card"><div class="num">LG/15</div><div class="name">Step-up (Chair)</div><div class="tag">Quads · Balance</div><div class="desc">Sturdy chair, drive through heel, full standing up. Control the descent.</div><div class="meta"><span>3×12/leg</span></div></div>
+        <div class="card"><div class="num">LG/16</div><div class="name">Glute Bridge</div><div class="tag">Glutes · Mat</div><div class="desc">On back, feet flat, drive hips up. Squeeze glutes 2 sec at top.</div><div class="meta"><span>4×15</span></div></div>
+        <div class="card"><div class="num">LG/17</div><div class="name">Single-Leg Glute Bridge</div><div class="tag">Unilateral glutes</div><div class="desc">Same, but one leg straight out. 3× harder. Exposes glute imbalances.</div><div class="meta"><span>3×10/leg</span></div></div>
+        <div class="card"><div class="num">LG/18</div><div class="name">Hip Thrust (Couch)</div><div class="tag">Glutes · Heavy</div><div class="desc">Shoulders on couch, backpack on hips. Full hip extension, strong squeeze.</div><div class="meta"><span>4×12</span></div></div>
+        <div class="card"><div class="num">LG/19</div><div class="name">RDL (Backpack)</div><div class="tag">Hamstrings</div><div class="desc">Hinge at hips, load hangs at thighs, slight knee bend. Feel stretch in hamstrings.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">LG/20</div><div class="name">Single-Leg RDL</div><div class="tag">Balance · Hamstrings</div><div class="desc">Hinge on one leg, other extends behind. Don't rush — balance is the point.</div><div class="meta"><span>3×8/leg</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===== CALVES ===== -->
+    <div class="mgroup reveal">
+      <div class="mgroup-head">
+        <div class="mgroup-title">CALVES</div>
+        <div class="mgroup-count">4 MOVEMENTS</div>
+      </div>
+      <div class="ex-grid">
+        <div class="card"><div class="num">CA/01</div><div class="name">Standing Calf Raise</div><div class="tag">Gastrocnemius</div><div class="desc">On edge of step for full range. Pause at top 1 sec, 2-sec descent.</div><div class="meta"><span>4×20</span></div></div>
+        <div class="card"><div class="num">CA/02</div><div class="name">Single-Leg Calf Raise</div><div class="tag">Unilateral</div><div class="desc">One foot. Use wall for balance. 2–3× harder than double-leg.</div><div class="meta"><span>3×12/leg</span></div></div>
+        <div class="card"><div class="num">CA/03</div><div class="name">Seated Calf Raise</div><div class="tag">Soleus</div><div class="desc">Sitting, backpack on knees, heels lift. Targets deeper calf muscle.</div><div class="meta"><span>3×15</span></div></div>
+        <div class="card"><div class="num">CA/04</div><div class="name">Donkey Calf Raise</div><div class="tag">Loaded stretch</div><div class="desc">Hinge at hips, partner or weight on lower back, raise heels.</div><div class="meta"><span>3×15</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===== CORE ===== -->
+    <div class="mgroup reveal">
+      <div class="mgroup-head">
+        <div class="mgroup-title">CORE <em>/</em> ABS</div>
+        <div class="mgroup-count">20 MOVEMENTS</div>
+      </div>
+      <div class="ex-grid">
+        <div class="card"><div class="num">AB/01</div><div class="name">Front Plank</div><div class="tag">Isometric · Essential</div><div class="desc">Forearms, straight body. Don't let hips sag. Quality over duration.</div><div class="meta"><span>3×45 S</span></div></div>
+        <div class="card"><div class="num">AB/02</div><div class="name">Side Plank</div><div class="tag">Obliques</div><div class="desc">On one forearm, stack feet. Hips high. Obliques and deep core fire.</div><div class="meta"><span>3×30 S/side</span></div></div>
+        <div class="card"><div class="num">AB/03</div><div class="name">RKC Plank</div><div class="tag">Advanced plank</div><div class="desc">Squeeze every muscle hard — glutes, quads, fists. 10 sec feels like 60.</div><div class="meta"><span>3×15 S</span></div></div>
+        <div class="card"><div class="num">AB/04</div><div class="name">Plank Up-Down</div><div class="tag">Dynamic</div><div class="desc">Forearm plank to high plank, one arm at a time. Hips stay square.</div><div class="meta"><span>3×10</span></div></div>
+        <div class="card"><div class="num">AB/05</div><div class="name">Shoulder Taps</div><div class="tag">Anti-rotation</div><div class="desc">High plank, tap opposite shoulder. Core fights rotation — that's the work.</div><div class="meta"><span>3×20</span></div></div>
+        <div class="card"><div class="num">AB/06</div><div class="name">Mountain Climber</div><div class="tag">Cardio · Core</div><div class="desc">Also appears in cardio. Here do them slow and controlled, 5-sec each knee.</div><div class="meta"><span>3×30 S</span></div></div>
+        <div class="card"><div class="num">AB/07</div><div class="name">Bicycle Crunch</div><div class="tag">Obliques</div><div class="desc">Elbow to opposite knee, full extension of other leg. 2-sec holds > fast reps.</div><div class="meta"><span>3×20</span></div></div>
+        <div class="card"><div class="num">AB/08</div><div class="name">Russian Twist</div><div class="tag">Obliques · Loaded</div><div class="desc">Feet off ground, rotate side to side with backpack or water bottle.</div><div class="meta"><span>3×20</span></div></div>
+        <div class="card"><div class="num">AB/09</div><div class="name">V-Up</div><div class="tag">Full abs</div><div class="desc">Lying flat, simultaneously lift arms and legs to meet at top. Precision over speed.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">AB/10</div><div class="name">Tuck-up</div><div class="tag">Easier than V-up</div><div class="desc">Sit-up motion but tuck knees to chest. Great stepping stone.</div><div class="meta"><span>3×15</span></div></div>
+        <div class="card"><div class="num">AB/11</div><div class="name">Lying Leg Raise</div><div class="tag">Lower abs</div><div class="desc">Hands under hips or by side, slow lower. Don't let feet touch the ground.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">AB/12</div><div class="name">Hollow Body Hold</div><div class="tag">Isometric · Gymnast core</div><div class="desc">Lower back pressed to mat, arms and legs up. Hardest 30 seconds of your life.</div><div class="meta"><span>3×30 S</span></div></div>
+        <div class="card"><div class="num">AB/13</div><div class="name">Hollow Body Rock</div><div class="tag">Dynamic core</div><div class="desc">In hollow position, rock like a banana. Maintains spine position under load.</div><div class="meta"><span>3×20</span></div></div>
+        <div class="card"><div class="num">AB/14</div><div class="name">Flutter Kick</div><div class="tag">Lower abs</div><div class="desc">Legs straight, small fast flutters. Lower back stays pressed down.</div><div class="meta"><span>3×30 S</span></div></div>
+        <div class="card"><div class="num">AB/15</div><div class="name">Scissor Kick</div><div class="tag">Hip flexors · Abs</div><div class="desc">Bigger cross-overs than flutters. Keeps tension high.</div><div class="meta"><span>3×20</span></div></div>
+        <div class="card"><div class="num">AB/16</div><div class="name">Dead Bug</div><div class="tag">Core control</div><div class="desc">On back, opposite arm and leg extend. Lower back never leaves floor.</div><div class="meta"><span>3×10/side</span></div></div>
+        <div class="card"><div class="num">AB/17</div><div class="name">Towel Ab Rollout</div><div class="tag">Ab wheel substitute</div><div class="desc">Smooth floor + towel under hands. Roll out from knees. Brutal and effective.</div><div class="meta"><span>3×8</span></div></div>
+        <div class="card"><div class="num">AB/18</div><div class="name">Reverse Crunch</div><div class="tag">Lower abs</div><div class="desc">Hips roll up off the floor. Squeeze, don't swing.</div><div class="meta"><span>3×15</span></div></div>
+        <div class="card"><div class="num">AB/19</div><div class="name">Pallof Press (Towel)</div><div class="tag">Anti-rotation</div><div class="desc">Tie towel to door handle, press out from chest, fight the pull. Gold.</div><div class="meta"><span>3×10/side</span></div></div>
+        <div class="card"><div class="num">AB/20</div><div class="name">Windshield Wipers</div><div class="tag">Obliques · Advanced</div><div class="desc">Lying, legs up, rotate side to side like wipers. Don't let back arch.</div><div class="meta"><span>3×10</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===== ARMS ===== -->
+    <div class="mgroup reveal">
+      <div class="mgroup-head">
+        <div class="mgroup-title">ARMS <em>/</em> BICEPS + TRICEPS</div>
+        <div class="mgroup-count">10 MOVEMENTS</div>
+      </div>
+      <div class="ex-grid">
+        <div class="card"><div class="num">AR/01</div><div class="name">Towel Bicep Curl</div><div class="tag">Biceps</div><div class="desc">Grip towel, step on one end, curl with the other. Self-resistance works.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">AR/02</div><div class="name">Backpack Curl</div><div class="tag">Biceps</div><div class="desc">Loaded backpack held by straps, standard curl motion. Slow on the way down.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">AR/03</div><div class="name">Isometric Bicep Hold</div><div class="tag">Static strength</div><div class="desc">Hands together, one pushes down, one pushes up. Tension builds mass.</div><div class="meta"><span>3×20 S</span></div></div>
+        <div class="card"><div class="num">AR/04</div><div class="name">Inverted Curl (Table)</div><div class="tag">Biceps · Pull</div><div class="desc">Under sturdy table, palms up, pull chest up. Hits biceps plus back.</div><div class="meta"><span>3×8</span></div></div>
+        <div class="card"><div class="num">AR/05</div><div class="name">Chair Dip</div><div class="tag">Triceps · Essential</div><div class="desc">Hands on chair edge, feet forward. Elbows 90°. Feet elevated for harder version.</div><div class="meta"><span>4×12</span></div></div>
+        <div class="card"><div class="num">AR/06</div><div class="name">Elevated Chair Dip</div><div class="tag">Harder triceps</div><div class="desc">Feet on second chair or couch. Suddenly much closer to parallel bar dips.</div><div class="meta"><span>3×10</span></div></div>
+        <div class="card"><div class="num">AR/07</div><div class="name">Diamond Push-up</div><div class="tag">Triceps · Chest</div><div class="desc">Repeated from chest — it belongs here too. Smokes triceps.</div><div class="meta"><span>3×8</span></div></div>
+        <div class="card"><div class="num">AR/08</div><div class="name">Tricep Extension (Backpack)</div><div class="tag">Overhead triceps</div><div class="desc">Backpack overhead, lower behind head with both hands, extend back up.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">AR/09</div><div class="name">Lying Tricep Extension</div><div class="tag">Skullcrusher sub</div><div class="desc">On back, backpack overhead, lower to forehead. Bread and butter tricep mass.</div><div class="meta"><span>3×12</span></div></div>
+        <div class="card"><div class="num">AR/10</div><div class="name">Pseudo Planche Push-up</div><div class="tag">Advanced</div><div class="desc">Hands turned back, shoulders over hands. Vicious triceps and shoulder work.</div><div class="meta"><span>3×6</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCHEDULE ============ -->
+<section id="schedule">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 04</div>
+      <div class="sec-title">WEEKLY<br>BATTLE PLAN</div>
+      <div class="sec-meta">5 SESSIONS / 2 REST<br>35 MIN AVERAGE</div>
+    </div>
+
+    <p class="sec-intro reveal">Since you have gym background, we stack lower and upper alternating, with dedicated HIIT and a cardio day. <strong>Two rest days — not negotiable</strong> for recovery.</p>
+
+    <div class="schedule reveal">
+      <div class="day hit"><div class="dname">MON</div><div class="dnum">DAY 01</div><div class="focus">UPPER STRENGTH</div><ul><li>Push-up variants 4×10</li><li>Inverted row 4×8</li><li>Pike push-up 3×8</li><li>Chair dip 3×12</li><li>Core finisher 8 min</li></ul></div>
+      <div class="day hit"><div class="dname">TUE</div><div class="dnum">DAY 02</div><div class="focus">LOWER STRENGTH</div><ul><li>Loaded squat 4×10</li><li>Bulgarian split 3×10</li><li>RDL 3×12</li><li>Glute bridge 3×15</li><li>Calf raise 3×20</li></ul></div>
+      <div class="day hit"><div class="dname">WED</div><div class="dnum">DAY 03</div><div class="focus">HIIT + CORE</div><ul><li>30s on / 30s off</li><li>6 rounds mixed</li><li>Core circuit 10 min</li><li>Total ~25 min</li></ul></div>
+      <div class="day rest"><div class="dname">THU</div><div class="dnum">DAY 04</div><div class="focus">ACTIVE REST</div><ul><li>30-min walk</li><li>Mobility flow</li><li>Foam work / stretch</li></ul></div>
+      <div class="day hit"><div class="dname">FRI</div><div class="dnum">DAY 05</div><div class="focus">FULL BODY</div><ul><li>Hindu push-ups 3×8</li><li>Pistol progression 3×5</li><li>Renegade rows 3×8</li><li>Jump squats 3×12</li><li>Plank variations 10 min</li></ul></div>
+      <div class="day hit"><div class="dname">SAT</div><div class="dnum">DAY 06</div><div class="focus">CARDIO + FLEX</div><ul><li>30-min run in place</li><li>Or 45-min walk</li><li>Full yoga flow 15 min</li></ul></div>
+      <div class="day rest"><div class="dname">SUN</div><div class="dnum">DAY 07</div><div class="focus">REST</div><ul><li>Weigh-in morning</li><li>Plan the week</li><li>Meal prep 1 hour</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIET ============ -->
+<section id="diet">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 05</div>
+      <div class="sec-title">DIET<br>BLUEPRINT</div>
+      <div class="sec-meta">VEGETARIAN · 2,100 KCAL<br>140G PROTEIN TARGET</div>
+    </div>
+
+    <p class="sec-intro reveal">Your fat loss happens in the kitchen, not the workout. As a vegetarian (no meat, fish, egg), <strong>protein is the hardest part</strong> — but completely doable with paneer, tofu, dal, soy chunks, and curd. Don't go below 1,800 kcal. You'll lose muscle and crash energy.</p>
+
+    <!-- daily macros -->
+    <div class="macros reveal">
+      <div class="macro"><div class="macro-label">Calories</div><div class="macro-val">2100<em>kcal</em></div><div class="macro-sub">range 2050–2200</div></div>
+      <div class="macro"><div class="macro-label">Protein</div><div class="macro-val">140<em>g</em></div><div class="macro-sub">non-negotiable</div></div>
+      <div class="macro"><div class="macro-label">Carbs</div><div class="macro-val">240<em>g</em></div><div class="macro-sub">fuel workouts</div></div>
+      <div class="macro"><div class="macro-label">Fats</div><div class="macro-val">60<em>g</em></div><div class="macro-sub">hormones</div></div>
+      <div class="macro"><div class="macro-label">Fiber</div><div class="macro-val">35<em>g</em></div><div class="macro-sub">kills cravings</div></div>
+      <div class="macro"><div class="macro-label">Water</div><div class="macro-val">3.5<em>L</em></div><div class="macro-sub">flush bloat</div></div>
+    </div>
+
+    <!-- DAY A -->
+    <div class="meal-day reveal">
+      <div class="meal-day-head">
+        <div class="meal-day-title">DAY A <em>/</em> SOUTH INDIAN</div>
+        <div class="meal-day-tot">~ <strong>2,080 kcal</strong> · <strong>142g</strong> protein</div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">7:30 AM</div>
+        <div class="meal-info"><h4>Breakfast</h4><div class="items">1 cup <strong>oats cooked in milk</strong> (250 ml) · 1 scoop whey or soy protein · 1 banana · 10 almonds</div></div>
+        <div class="meal-macro">~500 kcal<br><strong>35g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">10:30 AM</div>
+        <div class="meal-info"><h4>Mid-Morning</h4><div class="items">200g <strong>thick curd / hung yogurt</strong> with 1 tsp flax seeds and a few berries</div></div>
+        <div class="meal-macro">~200 kcal<br><strong>15g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">1:00 PM</div>
+        <div class="meal-info"><h4>Lunch</h4><div class="items">1.5 cups brown rice OR 3 rotis · 1 cup <strong>moong dal</strong> · 100g <strong>paneer bhurji</strong> · large salad with lemon · 1 tsp ghee max</div></div>
+        <div class="meal-macro">~600 kcal<br><strong>40g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">4:30 PM</div>
+        <div class="meal-info"><h4>Pre-Workout</h4><div class="items">1 apple + 1 tbsp <strong>peanut butter</strong> · or glass of milk + 2 dates</div></div>
+        <div class="meal-macro">~200 kcal<br><strong>10g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">7:30 PM</div>
+        <div class="meal-info"><h4>Dinner</h4><div class="items">2 rotis · <strong>tofu stir-fry</strong> (150g) · 1 cup rajma/chickpeas · cooked vegetables (unlimited)</div></div>
+        <div class="meal-macro">~580 kcal<br><strong>42g protein</strong></div>
+      </div>
+    </div>
+
+    <!-- DAY B -->
+    <div class="meal-day reveal">
+      <div class="meal-day-head">
+        <div class="meal-day-title">DAY B <em>/</em> SRI LANKAN STYLE</div>
+        <div class="meal-day-tot">~ <strong>2,150 kcal</strong> · <strong>138g</strong> protein</div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">7:30 AM</div>
+        <div class="meal-info"><h4>Breakfast</h4><div class="items">2 string hoppers + <strong>kadala curry</strong> (1 cup chickpeas) · 1 glass milk + protein scoop · few cashews</div></div>
+        <div class="meal-macro">~520 kcal<br><strong>36g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">10:30 AM</div>
+        <div class="meal-info"><h4>Mid-Morning</h4><div class="items">Handful <strong>roasted chana</strong> + 1 fruit (papaya or guava)</div></div>
+        <div class="meal-macro">~200 kcal<br><strong>12g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">1:00 PM</div>
+        <div class="meal-info"><h4>Lunch</h4><div class="items">1 cup red rice · <strong>parippu (dal curry)</strong> · soy chunk curry (50g dry) · gotu kola sambol · brinjal moju</div></div>
+        <div class="meal-macro">~620 kcal<br><strong>42g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">4:30 PM</div>
+        <div class="meal-info"><h4>Pre-Workout</h4><div class="items">1 banana + 6 almonds · or homemade lassi (curd + water + small honey)</div></div>
+        <div class="meal-macro">~210 kcal<br><strong>8g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">7:30 PM</div>
+        <div class="meal-info"><h4>Dinner</h4><div class="items">2 chapati · <strong>paneer curry</strong> (120g) · 1 cup green gram (mung) · cucumber salad · little coconut sambol</div></div>
+        <div class="meal-macro">~600 kcal<br><strong>40g protein</strong></div>
+      </div>
+    </div>
+
+    <!-- DAY C -->
+    <div class="meal-day reveal">
+      <div class="meal-day-head">
+        <div class="meal-day-title">DAY C <em>/</em> HIGH PROTEIN PUSH</div>
+        <div class="meal-day-tot">~ <strong>2,100 kcal</strong> · <strong>150g</strong> protein</div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">7:30 AM</div>
+        <div class="meal-info"><h4>Breakfast</h4><div class="items"><strong>Besan chilla</strong> (chickpea flour pancake, 3 small) with veggies · 200g curd · protein shake (1 scoop)</div></div>
+        <div class="meal-macro">~500 kcal<br><strong>40g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">10:30 AM</div>
+        <div class="meal-info"><h4>Mid-Morning</h4><div class="items">100g <strong>paneer cubes</strong> with chaat masala · cucumber sticks</div></div>
+        <div class="meal-macro">~220 kcal<br><strong>18g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">1:00 PM</div>
+        <div class="meal-info"><h4>Lunch</h4><div class="items">1 cup quinoa OR brown rice · <strong>soy chunk biryani</strong> (60g dry soy) · raita (200g curd + cucumber) · salad</div></div>
+        <div class="meal-macro">~620 kcal<br><strong>45g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">4:30 PM</div>
+        <div class="meal-info"><h4>Pre-Workout</h4><div class="items">Small bowl <strong>sprouts chaat</strong> (mung sprouts + onion + tomato + lemon)</div></div>
+        <div class="meal-macro">~180 kcal<br><strong>12g protein</strong></div>
+      </div>
+      <div class="meal">
+        <div class="meal-time">7:30 PM</div>
+        <div class="meal-info"><h4>Dinner</h4><div class="items">2 multigrain rotis · <strong>tofu &amp; black bean curry</strong> · stir-fried spinach + garlic · 1 small bowl rajma</div></div>
+        <div class="meal-macro">~580 kcal<br><strong>35g protein</strong></div>
+      </div>
+    </div>
+
+    <!-- protein chart -->
+    <h3 class="reveal" style="font-family:var(--display);font-size:36px;margin-top:60px;letter-spacing:1px;color:var(--text)">VEGETARIAN PROTEIN CHEAT SHEET</h3>
+    <p class="reveal" style="font-size:15px;color:var(--text-dim);margin-top:8px;font-weight:500">Print this. Pin it. Build every meal around one of these anchors.</p>
+    <div class="protein-table reveal">
+      <div class="protein-row head"><div class="name">FOOD</div><div class="amt">SERVING</div><div class="pro">PROTEIN</div></div>
+      <div class="protein-row"><div class="name">Soy chunks (dry)</div><div class="amt">50 g</div><div class="pro">25g</div></div>
+      <div class="protein-row"><div class="name">Whey / plant protein</div><div class="amt">1 scoop</div><div class="pro">22g</div></div>
+      <div class="protein-row"><div class="name">Paneer</div><div class="amt">100 g</div><div class="pro">18g</div></div>
+      <div class="protein-row"><div class="name">Greek curd / hung curd</div><div class="amt">200 g</div><div class="pro">18g</div></div>
+      <div class="protein-row"><div class="name">Chickpeas / chana (cooked)</div><div class="amt">1 cup</div><div class="pro">15g</div></div>
+      <div class="protein-row"><div class="name">Moong / toor dal (cooked)</div><div class="amt">1 cup</div><div class="pro">14g</div></div>
+      <div class="protein-row"><div class="name">Rajma / kidney beans</div><div class="amt">1 cup</div><div class="pro">13g</div></div>
+      <div class="protein-row"><div class="name">Tofu</div><div class="amt">100 g</div><div class="pro">12g</div></div>
+      <div class="protein-row"><div class="name">Milk (full or low fat)</div><div class="amt">1 cup</div><div class="pro">8g</div></div>
+      <div class="protein-row"><div class="name">Peanuts</div><div class="amt">30 g</div><div class="pro">7g</div></div>
+      <div class="protein-row"><div class="name">Almonds</div><div class="amt">30 g</div><div class="pro">6g</div></div>
+      <div class="protein-row"><div class="name">Quinoa (cooked)</div><div class="amt">1 cup</div><div class="pro">8g</div></div>
+    </div>
+
+    <!-- food columns -->
+    <div class="food-cols reveal">
+      <div class="food-list eat">
+        <h4>EAT FREELY <span class="badge">GREEN</span></h4>
+        <ul>
+          <li><strong>All non-starchy vegetables</strong> — spinach, kale, broccoli, cauliflower, beans, gourds, brinjal, capsicum</li>
+          <li><strong>Dal &amp; lentils</strong> — moong, toor, masoor, urad</li>
+          <li><strong>Beans</strong> — rajma, chickpeas, black beans, sprouts</li>
+          <li><strong>Curd, paneer, tofu</strong> — your protein anchors</li>
+          <li><strong>Fruits</strong> — 2–3/day, prefer berries, apple, papaya, guava</li>
+          <li><strong>Drinks</strong> — water, black coffee, plain green tea, lemon water</li>
+          <li><strong>Spices &amp; herbs</strong> — unlimited</li>
+        </ul>
+      </div>
+      <div class="food-list limit">
+        <h4>MINIMISE <span class="badge">RED</span></h4>
+        <ul>
+          <li><strong>Big white rice portions</strong> — swap half for dal or veggies</li>
+          <li><strong>Fried snacks</strong> — vadai, rolls, samosa, chips (once/week max)</li>
+          <li><strong>Sugar tea/coffee</strong> — switch to low-sugar or black</li>
+          <li><strong>Biscuits, cake, chocolate</strong> — keep them out of the house</li>
+          <li><strong>Soft drinks &amp; juice</strong> — 0 from this category</li>
+          <li><strong>Coconut oil in large amounts</strong> — still ~120 kcal/tbsp</li>
+          <li><strong>Late-night eating</strong> — last meal 3 hrs before sleep</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FASTING ============ -->
+<section id="fasting">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 06</div>
+      <div class="sec-title">INTERMITTENT<br>FASTING</div>
+      <div class="sec-meta">OPTIONAL TOOL · NOT MAGIC<br>BELLY FAT FRIENDLY</div>
+    </div>
+
+    <p class="sec-intro reveal">IF doesn't burn fat by itself — <strong>calories still rule</strong>. But for belly fat specifically, fasting helps a lot: it lowers insulin, improves insulin sensitivity, and naturally cuts ~300 kcal because you skip a meal. It also makes calorie control easier when you're not constantly thinking about food.</p>
+
+    <h3 class="reveal" style="font-family:var(--display);font-size:36px;letter-spacing:1px;color:var(--text);margin-bottom:6px">THE METHODS</h3>
+    <p class="reveal" style="font-size:14px;color:var(--text-muted);font-family:var(--mono);letter-spacing:1px;margin-bottom:8px">EAT WINDOW · FAST WINDOW · DIFFICULTY</p>
+
+    <div class="fast-methods reveal">
+      <div class="fast-card">
+        <div class="fast-name">14<em>:</em>10</div>
+        <div class="fast-level">BEGINNER · WEEK 1–2</div>
+        <div class="fast-window">Eat: 10 AM – 8 PM · Fast: 14h</div>
+        <div class="fast-desc">Easiest entry. Just push breakfast back 2 hours. Most people already do this on weekends naturally.</div>
+        <div class="fast-pros"><strong>BEST FOR</strong>Anyone new to fasting. No real hunger. Use this for 1–2 weeks before stepping up.</div>
+      </div>
+
+      <div class="fast-card recommended">
+        <div class="fast-name">16<em>:</em>8</div>
+        <div class="fast-level">SWEET SPOT · MAIN PROTOCOL</div>
+        <div class="fast-window">Eat: 12 PM – 8 PM · Fast: 16h</div>
+        <div class="fast-desc">The classic LeanGains method. Skip breakfast, eat 2 main meals + 1 snack in 8 hours. Sustainable forever, hits all the fat-loss benefits.</div>
+        <div class="fast-pros"><strong>BEST FOR</strong>Your default protocol. Train fasted, break fast at noon with a big protein meal. Easy to hit 140g protein with 2 meals + 1 snack.</div>
+      </div>
+
+      <div class="fast-card">
+        <div class="fast-name">18<em>:</em>6</div>
+        <div class="fast-level">INTERMEDIATE</div>
+        <div class="fast-window">Eat: 1 PM – 7 PM · Fast: 18h</div>
+        <div class="fast-desc">Tighter window. More autophagy benefits, slightly stronger fat loss. Harder to hit protein with only 2 meals + small snack.</div>
+        <div class="fast-pros"><strong>BEST FOR</strong>Once 16:8 feels easy. Drop into this 2–3 days/week, not daily, for vegetarians.</div>
+      </div>
+
+      <div class="fast-card">
+        <div class="fast-name">20<em>:</em>4</div>
+        <div class="fast-level">ADVANCED · CAUTION</div>
+        <div class="fast-window">Eat: 4 PM – 8 PM · Fast: 20h</div>
+        <div class="fast-desc">"Warrior Diet" style. One large meal + one small. Very hard to hit 140g vegetarian protein in 4 hours without GI distress.</div>
+        <div class="fast-pros"><strong>BEST FOR</strong>Occasional use only. Not as a regular protocol for vegetarians.</div>
+      </div>
+
+      <div class="fast-card">
+        <div class="fast-name">5<em>:</em>2</div>
+        <div class="fast-level">FLEXIBLE</div>
+        <div class="fast-window">5 normal days · 2 low-cal days (500 kcal)</div>
+        <div class="fast-desc">Eat normally 5 days a week, two non-consecutive days at ~500 kcal. Better for people who hate skipping breakfast.</div>
+        <div class="fast-pros"><strong>BEST FOR</strong>Social schedules. Good if family meals are non-negotiable in mornings.</div>
+      </div>
+
+      <div class="fast-card">
+        <div class="fast-name">OMAD</div>
+        <div class="fast-level">EXTREME · NOT RECOMMENDED</div>
+        <div class="fast-window">One Meal A Day · 23h fast</div>
+        <div class="fast-desc">Eat one giant meal, fast everything else. Almost impossible for vegetarians to hit protein and not lose muscle.</div>
+        <div class="fast-pros"><strong>BEST FOR</strong>Skip this for now. Not appropriate for your goals or diet.</div>
+      </div>
+    </div>
+
+    <!-- sample day timeline -->
+    <div class="timeline reveal">
+      <h3>YOUR 16:8 SAMPLE DAY</h3>
+      <div class="sub">FAST 8 PM → 12 PM · EATING WINDOW 12 PM – 8 PM</div>
+
+      <div class="tl-item"><div class="tl-time">6:00 AM</div><div class="tl-dot fast"></div><div class="tl-info"><span class="label fasting">FASTING</span><h5>Wake up</h5><p>Big glass of water with pinch of salt + lemon. Black coffee allowed.</p></div></div>
+      <div class="tl-item"><div class="tl-time">7:00 AM</div><div class="tl-dot fast"></div><div class="tl-info"><span class="label fasting">FASTING</span><h5>Workout (fasted)</h5><p>Fasted training is fine for 35-min sessions. If you feel weak, have a black coffee 30 min prior.</p></div></div>
+      <div class="tl-item"><div class="tl-time">10:00 AM</div><div class="tl-dot fast"></div><div class="tl-info"><span class="label fasting">FASTING</span><h5>Plain green tea</h5><p>Or black tea, no sugar. Helps appetite if hunger spikes here.</p></div></div>
+      <div class="tl-item"><div class="tl-time">12:00 PM</div><div class="tl-dot"></div><div class="tl-info"><span class="label eating">BREAK FAST</span><h5>First meal — protein heavy</h5><p>Don't binge. Start with protein + veggies. Eat slowly. ~700 kcal, 50g protein. Example: paneer + chickpea curry + 1.5 cups rice + salad.</p></div></div>
+      <div class="tl-item"><div class="tl-time">3:30 PM</div><div class="tl-dot"></div><div class="tl-info"><span class="label eating">EATING</span><h5>Snack</h5><p>200g curd with flax seeds + a fruit. Or roasted chana + protein shake. ~350 kcal, 30g protein.</p></div></div>
+      <div class="tl-item"><div class="tl-time">7:30 PM</div><div class="tl-dot"></div><div class="tl-info"><span class="label eating">LAST MEAL</span><h5>Dinner</h5><p>Tofu/paneer + dal + 2 rotis + vegetables. Stop here. ~700 kcal, 50g protein. Total day: ~1750–1850 kcal, 130g protein.</p></div></div>
+      <div class="tl-item"><div class="tl-time">8:00 PM</div><div class="tl-dot fast"></div><div class="tl-info"><span class="label fasting">FAST BEGINS</span><h5>16-hour clock starts</h5><p>Water and herbal teas only. Sleep by 10:30. The body does its repair work.</p></div></div>
+    </div>
+
+    <!-- yes / no rules -->
+    <div class="fast-rules reveal">
+      <div class="rule-box yes">
+        <h4>ALLOWED DURING FAST</h4>
+        <ul>
+          <li><strong>Water</strong> — drink lots, plain or sparkling</li>
+          <li><strong>Black coffee</strong> — no milk, no sugar, no sweetener</li>
+          <li><strong>Plain green tea</strong> — unsweetened</li>
+          <li><strong>Plain black tea</strong> — unsweetened</li>
+          <li><strong>Pinch of salt</strong> in water (electrolytes)</li>
+          <li><strong>Lemon slice in water</strong> — basically zero calories</li>
+          <li><strong>Apple cider vinegar</strong> diluted</li>
+        </ul>
+      </div>
+      <div class="rule-box no">
+        <h4>BREAKS YOUR FAST</h4>
+        <ul>
+          <li><strong>Milk</strong> — even a splash in tea</li>
+          <li><strong>Sugar</strong> — any amount</li>
+          <li><strong>Honey</strong> — pure carbs</li>
+          <li><strong>Artificial sweeteners</strong> — can spike insulin response</li>
+          <li><strong>Juice / soft drinks</strong> — obvious no</li>
+          <li><strong>BCAAs / protein shakes</strong> — yes, calories</li>
+          <li><strong>Chewing gum (sugar)</strong> — small but counts</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- fasting tips -->
+    <div class="callout reveal">
+      <h4>NITHILAN'S CHECKLIST FOR IF</h4>
+      <p><strong>1.</strong> Start with 14:10 for the first week. Don't jump to 16:8 immediately.<br>
+      <strong>2.</strong> Drink 3+ litres of water daily — fasting requires more water, not less.<br>
+      <strong>3.</strong> If you feel lightheaded, dizzy, or shaky → break the fast. Try again tomorrow.<br>
+      <strong>4.</strong> Don't fast on heavy training days if you're new — eat normally those days for 2 weeks.<br>
+      <strong>5.</strong> Plan your eating window around your largest meal. Most people: workout fasted → break fast at noon → biggest meal at lunch → light dinner.<br>
+      <strong>6.</strong> Give it <strong>2 full weeks</strong> before judging if it works for you. The first 5 days are the worst.</p>
+    </div>
+
+    <!-- when not to -->
+    <div class="callout reveal" style="background:transparent;border-left-color:var(--text-muted)">
+      <h4 style="color:var(--text)">WHEN <strong>NOT</strong> TO FAST</h4>
+      <p>Skip IF if you have <strong>diabetes or blood sugar issues</strong> (consult a doctor first), if you've ever struggled with disordered eating, if you're underweight, if you're recovering from illness, or if you're pregnant. If fasting makes you obsessive about food rather than less obsessed, stop — it's not for you, and that's fine. Plenty of people lose belly fat without it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VITALITY ============ -->
+<section id="vitality">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 07</div>
+      <div class="sec-title">VITALITY &amp;<br>PELVIC POWER</div>
+      <div class="sec-meta">MEN'S HEALTH<br>EVIDENCE-BASED</div>
+    </div>
+
+    <p class="sec-intro reveal">Erection issues in your late 20s are <strong>far more common than most men think</strong> — research suggests 25–30% of men under 40 deal with some form of ED. At your age it's almost always lifestyle-driven and very fixable. The big six causes: <strong>belly fat, poor sleep, chronic stress, excessive porn use, alcohol/smoking, and pelvic-floor weakness</strong>. The catch — ED in young men can also be an early warning sign of cardiovascular issues, so don't ignore it. <strong>Get a basic blood panel</strong> (testosterone, blood sugar, lipid profile) before assuming it's just lifestyle.</p>
+
+    <!-- Tamil Q&A -->
+    <div class="callout reveal">
+      <h4>"ஆணுறுப்பு விறைத்தவுடன் சுருங்குதா?" — Honest Answer</h4>
+      <p><strong>If it happens after ejaculation:</strong> This is <strong>completely normal</strong>. It's called the refractory period — the body needs time to reset. At 27, that's anywhere from 15 minutes to a few hours. Every healthy man experiences this.<br><br>
+      <strong>If you lose the erection before or during sex (without ejaculation):</strong> This is what people actually mean by ED. Three usual causes at your age — <strong>(1) performance anxiety</strong> (by far the biggest factor in young men), <strong>(2) poor metabolic health</strong> — belly fat lowers testosterone and damages the small blood vessels needed for erections, <strong>(3) overuse of porn</strong> — desensitization is a documented and reversible issue.<br><br>
+      27 வயதில இது normal-a? <strong>Illa.</strong> Ana fully fix-able. Belly fat குறைஞ்சா, sleep சரியா இருந்தா, stress குறைஞ்சா, pelvic floor exercises pannina — most cases-la 8–12 weeks-la சரியாகும். Severe-a feel ஆனா doctor-a meet pannunga — அதுதான் safest path.</p>
+    </div>
+
+    <h3 class="reveal" style="font-family:var(--display);font-size:36px;margin-top:60px;letter-spacing:1px;color:var(--text)">PELVIC FLOOR EXERCISES (KEGELS FOR MEN)</h3>
+    <p class="reveal" style="font-size:14.5px;color:var(--text-dim);margin-top:8px;margin-bottom:24px;font-weight:500">
+      <strong>Find the muscle:</strong> Imagine you're stopping yourself from passing gas in a meeting. That contraction = your pelvic floor. <strong>Don't</strong> practise by stopping urine mid-stream regularly (it can cause UTIs). Train these <strong>3× per day</strong> for at least 6–8 weeks before judging results. Quietly during your commute, at your desk, in bed — no one knows you're doing them.
+    </p>
+
+    <div class="ex-grid reveal">
+      <div class="card"><div class="num">PF/01</div><div class="name">Basic Kegel</div><div class="tag">Foundation</div><div class="desc">Squeeze pelvic floor for 3 sec, fully release for 3 sec. Don't hold breath. Don't squeeze glutes or stomach — only the pelvic floor.</div><div class="meta"><span>3×10 / DAY</span></div></div>
+      <div class="card"><div class="num">PF/02</div><div class="name">Long Hold Kegel</div><div class="tag">Strength</div><div class="desc">Squeeze and hold for 10 sec, release 10 sec. Builds endurance in the muscle that controls erections and ejaculation.</div><div class="meta"><span>3×10 / DAY</span></div></div>
+      <div class="card"><div class="num">PF/03</div><div class="name">Quick Flicks</div><div class="tag">Speed</div><div class="desc">Rapid 1-sec contract / 1-sec release. Trains fast-twitch fibres for control during sex.</div><div class="meta"><span>3×30 / DAY</span></div></div>
+      <div class="card"><div class="num">PF/04</div><div class="name">Elevator Kegel</div><div class="tag">Control</div><div class="desc">Imagine an elevator going up 5 floors — squeeze slightly harder each floor. Slowly come back down. Game changer for control.</div><div class="meta"><span>3×5 / DAY</span></div></div>
+      <div class="card"><div class="num">PF/05</div><div class="name">Reverse Kegel</div><div class="tag">Relaxation</div><div class="desc">Gentle outward push (like starting urine flow). Counters over-tightness — equally important. Hold 5 sec.</div><div class="meta"><span>2×10 / DAY</span></div></div>
+      <div class="card"><div class="num">PF/06</div><div class="name">Bridge + Kegel</div><div class="tag">Loaded</div><div class="desc">Glute bridge, hold Kegel at top for 5 sec. Combines glute strength with pelvic floor under load.</div><div class="meta"><span>3×12</span></div></div>
+      <div class="card"><div class="num">PF/07</div><div class="name">Squat + Kegel</div><div class="tag">Functional</div><div class="desc">Slow squat, contract pelvic floor at the bottom and as you stand. Real-world functional pattern.</div><div class="meta"><span>3×10</span></div></div>
+      <div class="card"><div class="num">PF/08</div><div class="name">Standing Activation</div><div class="tag">Habit · Free reps</div><div class="desc">Random Kegel sets throughout the day — in line, on the toilet, at your desk. Builds the habit.</div><div class="meta"><span>RANDOM</span></div></div>
+    </div>
+
+    <h3 class="reveal" style="font-family:var(--display);font-size:36px;margin-top:60px;letter-spacing:1px;color:var(--text)">YOGA FOR PELVIC CIRCULATION</h3>
+    <p class="reveal" style="font-size:14.5px;color:var(--text-dim);margin-top:8px;margin-bottom:24px;font-weight:500">
+      Erections are a <strong>blood flow event</strong>. These poses increase circulation to the pelvic region and reduce hip tension that compresses the area. Hold each 30–60 sec, breathe deep through the nose.
+    </p>
+
+    <div class="ex-grid reveal">
+      <div class="card"><div class="num">YG/01</div><div class="name">Bow Pose</div><div class="tag">Dhanurasana</div><div class="desc">Lie face down, grab ankles, lift chest and thighs. Massages reproductive organs, drives blood to pelvis.</div><div class="meta"><span>3×30 S</span></div></div>
+      <div class="card"><div class="num">YG/02</div><div class="name">Cobra Pose</div><div class="tag">Bhujangasana</div><div class="desc">Prone, palms under shoulders, lift chest. Opens pelvis and improves circulation to lower abdomen.</div><div class="meta"><span>3×30 S</span></div></div>
+      <div class="card"><div class="num">YG/03</div><div class="name">Bridge Pose</div><div class="tag">Setu Bandhasana</div><div class="desc">Glute bridge held longer with breath. Activates pelvic floor naturally and stretches hip flexors.</div><div class="meta"><span>3×45 S</span></div></div>
+      <div class="card"><div class="num">YG/04</div><div class="name">Boat Pose</div><div class="tag">Naukasana</div><div class="desc">Seated V, balance on sit bones, legs and torso lifted. Strengthens core + pelvic floor in one move.</div><div class="meta"><span>3×20 S</span></div></div>
+      <div class="card"><div class="num">YG/05</div><div class="name">Deep Squat</div><div class="tag">Malasana</div><div class="desc">Feet wider than hips, sink deep, elbows pressing knees out. Opens hips, mobilises the pelvis.</div><div class="meta"><span>2×60 S</span></div></div>
+      <div class="card"><div class="num">YG/06</div><div class="name">Reclined Butterfly</div><div class="tag">Supta Baddha Konasana</div><div class="desc">Lying on back, soles together, knees fall open. Releases groin tension. Restorative.</div><div class="meta"><span>2×90 S</span></div></div>
+      <div class="card"><div class="num">YG/07</div><div class="name">Plow Pose</div><div class="tag">Halasana · Advanced</div><div class="desc">Lying on back, swing legs over head to floor. Stimulates thyroid (testosterone link). Skip if neck issues.</div><div class="meta"><span>1×45 S</span></div></div>
+      <div class="card"><div class="num">YG/08</div><div class="name">Pigeon Pose</div><div class="tag">Hip release</div><div class="desc">Already in cool down — listed here too because it directly releases tension that restricts pelvic blood flow.</div><div class="meta"><span>2×60 S/side</span></div></div>
+    </div>
+
+    <h3 class="reveal" style="font-family:var(--display);font-size:36px;margin-top:60px;letter-spacing:1px;color:var(--text)">BREATHING &amp; STRESS</h3>
+    <p class="reveal" style="font-size:14.5px;color:var(--text-dim);margin-top:8px;margin-bottom:24px;font-weight:500">
+      Performance anxiety is the <strong>single biggest cause</strong> of ED in men under 35. The nervous system controls erections — if it's stuck in fight-or-flight, blood doesn't flow where you want it to. These calm it down.
+    </p>
+
+    <div class="ex-grid reveal">
+      <div class="card"><div class="num">BR/01</div><div class="name">Diaphragmatic Breathing</div><div class="tag">Daily essential</div><div class="desc">Lying down, hand on belly. 4 sec in (belly rises), 7 sec out (belly falls). 5 minutes daily kills baseline anxiety.</div><div class="meta"><span>5 MIN</span></div></div>
+      <div class="card"><div class="num">BR/02</div><div class="name">Box Breathing</div><div class="tag">Calm protocol</div><div class="desc">4 sec in, 4 hold, 4 out, 4 hold. Used by Navy SEALs to control nerves. Use before bed and before intimate moments.</div><div class="meta"><span>4 MIN</span></div></div>
+      <div class="card"><div class="num">BR/03</div><div class="name">Bhramari (Bee Breath)</div><div class="tag">Anxiety release</div><div class="desc">Inhale, then exhale with a humming sound. Vibration calms the nervous system fast.</div><div class="meta"><span>5 ROUNDS</span></div></div>
+      <div class="card"><div class="num">BR/04</div><div class="name">Anulom Vilom</div><div class="tag">Alternate nostril</div><div class="desc">Close right nostril, inhale left. Switch — close left, exhale right. Continue alternating. Balances nervous system.</div><div class="meta"><span>5 MIN</span></div></div>
+    </div>
+
+    <!-- Lifestyle -->
+    <div class="food-cols reveal" style="margin-top:50px">
+      <div class="food-list eat">
+        <h4>HELPS YOUR PERFORMANCE <span class="badge">DO MORE</span></h4>
+        <ul>
+          <li><strong>7+ hours sleep</strong> — testosterone is made during deep sleep</li>
+          <li><strong>Cardio 3×/week</strong> — improves the blood flow system erections depend on</li>
+          <li><strong>Lose belly fat</strong> — visceral fat directly lowers testosterone</li>
+          <li><strong>Cut back on porn (especially HD/extreme)</strong> — desensitization is real and well-documented</li>
+          <li><strong>Foods:</strong> walnuts, almonds, watermelon, pomegranate, dark chocolate, oats, leafy greens</li>
+          <li><strong>Zinc-rich foods:</strong> pumpkin seeds, chickpeas, cashews, paneer</li>
+          <li><strong>Sunlight 15 min/day</strong> — vitamin D supports testosterone</li>
+          <li><strong>Meditation 10 min/day</strong> — reduces cortisol, the testosterone killer</li>
+        </ul>
+      </div>
+      <div class="food-list limit">
+        <h4>HURTS YOUR PERFORMANCE <span class="badge">CUT BACK</span></h4>
+        <ul>
+          <li><strong>Excessive porn use</strong> — single biggest reversible factor for young men</li>
+          <li><strong>Alcohol</strong> — even moderate amounts impair erection quality</li>
+          <li><strong>Smoking / vaping</strong> — directly damages the small blood vessels of the penis</li>
+          <li><strong>Sleep below 6 hours</strong> — drops testosterone by 10–15% the next day</li>
+          <li><strong>Tight underwear</strong> — heat lowers testosterone over time</li>
+          <li><strong>Daily hot baths / saunas</strong> — same heat issue</li>
+          <li><strong>High sugar / processed food</strong> — high blood sugar damages nerves and vessels</li>
+          <li><strong>Recreational drugs</strong> — most are anti-erection, even cannabis</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- When to see a doctor -->
+    <div class="callout reveal">
+      <h4>WHEN TO SEE A DOCTOR — DON'T SKIP THIS</h4>
+      <p>Visit your GP — not the internet, not WhatsApp groups — if any of these apply:<br><br>
+      <strong>•</strong> Problem persists for 4+ weeks despite lifestyle changes<br>
+      <strong>•</strong> You've completely lost <strong>morning erections</strong> (a key diagnostic sign)<br>
+      <strong>•</strong> Sudden onset (not gradual)<br>
+      <strong>•</strong> Any pain involved<br>
+      <strong>•</strong> Family history of heart disease, diabetes, or high blood pressure<br><br>
+      <strong>Ask the doctor for these tests:</strong> total testosterone (morning blood draw — must be before 10 AM), HbA1c (3-month blood sugar average), lipid profile (cholesterol), thyroid panel. These are inexpensive and rule out 90% of medical causes. ED in a 27-year-old can be the first sign of cardiovascular disease — taking it seriously now protects you for the next 50 years. <strong>This is not embarrassing. Doctors see this every single day.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAMINA ============ -->
+<section id="stamina">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 08</div>
+      <div class="sec-title">STAMINA &amp;<br>ENDURANCE</div>
+      <div class="sec-meta">LASTING LONGER<br>TRAINABLE SKILL</div>
+    </div>
+
+    <p class="sec-intro reveal">
+      Lasting longer in bed is a <strong>trainable skill</strong>, not a fixed trait. Premature ejaculation affects ~30% of men at some point — it's the most common male sexual issue, more common than ED. Forget what porn shows: the average duration of penetrative sex is <strong>5–7 minutes</strong>, not 30+. Anything 7+ minutes is statistically above average. With 8 weeks of structured practice, most men can extend control significantly.
+    </p>
+
+    <!-- Reality check stats -->
+    <div class="macros reveal">
+      <div class="macro"><div class="macro-label">Avg. Duration</div><div class="macro-val">5-7<em>min</em></div><div class="macro-sub">research consensus</div></div>
+      <div class="macro"><div class="macro-label">PE prevalence</div><div class="macro-val">30<em>%</em></div><div class="macro-sub">men experience it</div></div>
+      <div class="macro"><div class="macro-label">Improvement</div><div class="macro-val">8<em>wk</em></div><div class="macro-sub">trainable timeline</div></div>
+      <div class="macro"><div class="macro-label">Practice</div><div class="macro-val">3<em>x/wk</em></div><div class="macro-sub">solo training</div></div>
+      <div class="macro"><div class="macro-label">Kegel sets</div><div class="macro-val">3<em>/day</em></div><div class="macro-sub">non-negotiable</div></div>
+      <div class="macro"><div class="macro-label">Sleep</div><div class="macro-val">7<em>hr</em></div><div class="macro-sub">hormone reset</div></div>
+    </div>
+
+    <!-- Proven Techniques -->
+    <h3 class="reveal" style="font-family:var(--display);font-size:36px;margin-top:60px;letter-spacing:1px;color:var(--text)">THE 6 PROVEN TECHNIQUES</h3>
+    <p class="reveal" style="font-size:14.5px;color:var(--text-dim);margin-top:8px;margin-bottom:24px;font-weight:500">
+      All clinically studied. Practice solo first — these are skills that need rehearsal before "game day". <strong>4 weeks of consistent solo practice</strong> before applying with a partner.
+    </p>
+
+    <div class="ex-grid reveal">
+      <div class="card">
+        <div class="num">ST/01</div>
+        <div class="name">Stop-Start Method</div>
+        <div class="tag">Semans Technique</div>
+        <div class="desc">Stimulate yourself until you feel the urge to climax. Stop completely. Wait 30 seconds. Resume. Repeat 3–4 cycles before allowing climax. Trains your body to recognize the "point of no return" before crossing it.</div>
+        <div class="meta"><span>SOLO 3X/WK</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">ST/02</div>
+        <div class="name">Squeeze Technique</div>
+        <div class="tag">Masters &amp; Johnson</div>
+        <div class="desc">When near climax, firmly squeeze just below the head of the penis with thumb and forefinger for 30 seconds. Erection partially subsides. Resume. Repeat 3 cycles. Clinically validated for 50+ years.</div>
+        <div class="meta"><span>SOLO OR DUO</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">ST/03</div>
+        <div class="name">Edging</div>
+        <div class="tag">Modern stop-start</div>
+        <div class="desc">Extended stop-start sessions, aiming for 20+ minutes of stimulation before climax. Builds tolerance to high arousal. <strong>Don't watch porn while doing this</strong> — train mind-body connection, not screen response.</div>
+        <div class="meta"><span>20+ MIN</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">ST/04</div>
+        <div class="name">Pelvic Squeeze at PONR</div>
+        <div class="tag">Pelvic floor</div>
+        <div class="desc">"Point of No Return" — that moment just before ejaculation. A strong Kegel squeeze right before that point can delay or stop the reflex. Requires a trained pelvic floor (do your daily Kegels for weeks before this works).</div>
+        <div class="meta"><span>SKILL DRILL</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">ST/05</div>
+        <div class="name">Breath Control</div>
+        <div class="tag">Nervous system</div>
+        <div class="desc">Fast shallow breathing = sympathetic activation = quicker climax. Slow nasal breathing (4 sec in, 6 sec out) keeps you parasympathetic. Practice during arousal to build the habit.</div>
+        <div class="meta"><span>EVERY SESSION</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">ST/06</div>
+        <div class="name">Sensate Focus</div>
+        <div class="tag">Mind-body</div>
+        <div class="desc">Sex therapy technique. Focus on sensations without performance pressure. Notice without judging. Performance anxiety is a self-fulfilling prophecy — present-moment awareness breaks it.</div>
+        <div class="meta"><span>MEDITATION</span></div>
+      </div>
+    </div>
+
+    <!-- Penis-specific exercises -->
+    <h3 class="reveal" style="font-family:var(--display);font-size:36px;margin-top:60px;letter-spacing:1px;color:var(--text)">PENIS-SPECIFIC EXERCISES</h3>
+    <p class="reveal" style="font-size:14.5px;color:var(--text-dim);margin-top:8px;margin-bottom:24px;font-weight:500">
+      These directly target the penis and surrounding tissue. Done daily for 6–8 weeks. <strong>Privacy required</strong> — bathroom or bedroom. Be gentle — no jerking motions, no force, no pain.
+    </p>
+
+    <div class="ex-grid reveal">
+      <div class="card">
+        <div class="num">PN/01</div>
+        <div class="name">Towel Lift (Dry)</div>
+        <div class="tag">Pelvic floor + visual feedback</div>
+        <div class="desc">Erect penis (morning erection works well). Drape a small dry hand towel across the shaft. Without using hands, lift the towel by contracting pelvic floor muscles. Hold 3–5 sec. The visual feedback shows your pelvic floor strength clearly.</div>
+        <div class="meta"><span>10 REPS</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">PN/02</div>
+        <div class="name">Towel Lift (Wet)</div>
+        <div class="tag">Progressive overload</div>
+        <div class="desc">Once dry version is easy, use a slightly damp towel for added weight. Same protocol. This is progressive overload for the pelvic floor — like adding weight to your squat.</div>
+        <div class="meta"><span>10 REPS</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">PN/03</div>
+        <div class="name">Perineum Massage</div>
+        <div class="tag">Circulation</div>
+        <div class="desc">The perineum is the area between scrotum and anus. Apply gentle pressure with two fingers, small circular motions for 2–3 minutes. Increases blood flow to the entire pelvic region. Can do in shower.</div>
+        <div class="meta"><span>2–3 MIN DAILY</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">PN/04</div>
+        <div class="name">Morning Erection Check</div>
+        <div class="tag">Diagnostic habit</div>
+        <div class="desc">Note the presence and quality of morning wood. Healthy men have 3–5 erections per night. Consistent absence is a key diagnostic signal — tell your doctor. Don't skip this awareness step.</div>
+        <div class="meta"><span>DAILY</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">PN/05</div>
+        <div class="name">Aśvinī Mudrā</div>
+        <div class="tag">Yoga · Anal lock</div>
+        <div class="desc">Ancient yogic practice. Contract anal sphincter strongly, hold 5 sec, release. 30 reps. Deeper variant of Kegel — strengthens the deep pelvic floor that supports erections.</div>
+        <div class="meta"><span>3×30/DAY</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">PN/06</div>
+        <div class="name">Mūla Bandha</div>
+        <div class="tag">Yoga · Root lock</div>
+        <div class="desc">Contract pelvic floor + lower abdomen + hold breath for 5 sec. Release. Combines breathing with the deepest pelvic activation. Practiced in pranayama traditions for thousands of years.</div>
+        <div class="meta"><span>3×10/DAY</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">PN/07</div>
+        <div class="name">Warm Compress</div>
+        <div class="tag">Circulation aid</div>
+        <div class="desc">Soft warm (not hot) cloth wrapped around the area for 5 minutes before pelvic exercises. Increases blood flow and prepares tissue. Don't overheat — heat above body temperature lowers testosterone.</div>
+        <div class="meta"><span>5 MIN</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">PN/08</div>
+        <div class="name">Hip Stretches</div>
+        <div class="tag">Tension release</div>
+        <div class="desc">Tight hip flexors directly compress nerves and vessels supplying the penis. The Hip Flexor Stretch + Pigeon Pose from your cool down section are essential — hold each 60+ sec daily.</div>
+        <div class="meta"><span>DAILY</span></div>
+      </div>
+    </div>
+
+    <!-- 8-week program -->
+    <h3 class="reveal" style="font-family:var(--display);font-size:36px;margin-top:60px;letter-spacing:1px;color:var(--text)">8-WEEK STAMINA PROGRAM</h3>
+    <p class="reveal" style="font-size:14.5px;color:var(--text-dim);margin-top:8px;margin-bottom:24px;font-weight:500">
+      Treat this like a training plan — progress gradually, don't skip phases. Most men see noticeable change by week 6.
+    </p>
+
+    <div class="program-grid reveal">
+      <div class="day hit">
+        <div class="dname">WK 1-2</div>
+        <div class="dnum">FOUNDATION</div>
+        <div class="focus">BUILD THE BASE</div>
+        <ul>
+          <li>Basic Kegels 3×10 daily</li>
+          <li>Reverse Kegels 2×10</li>
+          <li>Diaphragmatic breathing 5 min</li>
+          <li>Towel lift attempts</li>
+          <li>Perineum massage daily</li>
+          <li>NO PE training yet</li>
+        </ul>
+      </div>
+      <div class="day hit">
+        <div class="dname">WK 3-4</div>
+        <div class="dnum">AWARENESS</div>
+        <div class="focus">FIND YOUR PONR</div>
+        <ul>
+          <li>Add long hold Kegels</li>
+          <li>Quick flicks 3×30</li>
+          <li>Solo stop-start 2x/wk</li>
+          <li>Learn your PONR</li>
+          <li>Aim 10 min sessions</li>
+          <li>No porn during practice</li>
+        </ul>
+      </div>
+      <div class="day hit">
+        <div class="dname">WK 5-6</div>
+        <div class="dnum">CONTROL</div>
+        <div class="focus">EXTEND DURATION</div>
+        <ul>
+          <li>Stop-start 3x/wk</li>
+          <li>Add squeeze technique</li>
+          <li>Practice breath at high arousal</li>
+          <li>Aim 15+ min sessions</li>
+          <li>Mūla Bandha daily</li>
+          <li>Wet towel lift</li>
+        </ul>
+      </div>
+      <div class="day hit">
+        <div class="dname">WK 7-8</div>
+        <div class="dnum">APPLICATION</div>
+        <div class="focus">REAL WORLD</div>
+        <ul>
+          <li>Apply with partner</li>
+          <li>Communicate openly</li>
+          <li>Use techniques in real time</li>
+          <li>Don't expect perfection</li>
+          <li>Continue all daily work</li>
+          <li>Aim 20+ min sessions</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Foods for blood flow -->
+    <h3 class="reveal" style="font-family:var(--display);font-size:36px;margin-top:60px;letter-spacing:1px;color:var(--text)">FOODS THAT BOOST BLOOD FLOW</h3>
+    <p class="reveal" style="font-size:14.5px;color:var(--text-dim);margin-top:8px;margin-bottom:24px;font-weight:500">
+      Erections are <strong>100% a blood flow event</strong>. These foods boost nitric oxide — the molecule that opens blood vessels (the same way Viagra works, but naturally). All vegetarian.
+    </p>
+
+    <div class="protein-table reveal">
+      <div class="protein-row head"><div class="name">FOOD</div><div class="amt">SERVING</div><div class="pro">EFFECT</div></div>
+      <div class="protein-row"><div class="name">Watermelon</div><div class="amt">2 cups</div><div class="pro" style="font-size:13px;font-family:var(--mono)">CITRULLINE → NO</div></div>
+      <div class="protein-row"><div class="name">Beetroot / juice</div><div class="amt">1 cup</div><div class="pro" style="font-size:13px;font-family:var(--mono)">NITRATES → NO</div></div>
+      <div class="protein-row"><div class="name">Pomegranate</div><div class="amt">1 fruit / juice</div><div class="pro" style="font-size:13px;font-family:var(--mono)">ANTIOXIDANTS</div></div>
+      <div class="protein-row"><div class="name">Dark chocolate (70%+)</div><div class="amt">30 g</div><div class="pro" style="font-size:13px;font-family:var(--mono)">FLAVONOIDS</div></div>
+      <div class="protein-row"><div class="name">Spinach / leafy greens</div><div class="amt">2 cups</div><div class="pro" style="font-size:13px;font-family:var(--mono)">NITRATES</div></div>
+      <div class="protein-row"><div class="name">Walnuts</div><div class="amt">30 g</div><div class="pro" style="font-size:13px;font-family:var(--mono)">ARGININE</div></div>
+      <div class="protein-row"><div class="name">Oats</div><div class="amt">1 cup</div><div class="pro" style="font-size:13px;font-family:var(--mono)">ARGININE</div></div>
+      <div class="protein-row"><div class="name">Garlic (raw)</div><div class="amt">1 clove</div><div class="pro" style="font-size:13px;font-family:var(--mono)">ALLICIN</div></div>
+      <div class="protein-row"><div class="name">Pumpkin seeds</div><div class="amt">30 g</div><div class="pro" style="font-size:13px;font-family:var(--mono)">ZINC + MAGNESIUM</div></div>
+      <div class="protein-row"><div class="name">Tomatoes</div><div class="amt">1 cup</div><div class="pro" style="font-size:13px;font-family:var(--mono)">LYCOPENE</div></div>
+    </div>
+
+    <!-- Mind game -->
+    <div class="callout reveal">
+      <h4>THE MIND GAME — READ THIS TWICE</h4>
+      <p><strong>Performance anxiety is a self-fulfilling prophecy.</strong> The more you worry about lasting, the less you do. The fix is counterintuitive — stop trying to "perform" and start being present.<br><br>
+      <strong>•</strong> Communicate openly with your partner. Pressure makes it worse. Honesty reduces it.<br>
+      <strong>•</strong> Foreplay is sex too. Penetration isn't the only thing that matters — and it's not even the most important thing for most partners.<br>
+      <strong>•</strong> First time with a new partner? Almost everyone has issues. Don't catastrophise.<br>
+      <strong>•</strong> If anxiety persists, consider talking to a therapist. Not because something is wrong with you — because therapy genuinely works for this.<br><br>
+      <em>உங்க mind இல stress இருந்தா, body-um cooperate பண்ணாது. Relax pannunga — practice + patience-தான் answer.</em></p>
+    </div>
+
+    <!-- What helps / what hurts -->
+    <div class="fast-rules reveal">
+      <div class="rule-box yes">
+        <h4>HELPFUL HABITS</h4>
+        <ul>
+          <li><strong>Practice solo first</strong> before applying with partner</li>
+          <li><strong>Communicate openly</strong> with your partner</li>
+          <li><strong>Train Kegels daily</strong> — non-negotiable</li>
+          <li><strong>Slow nasal breathing</strong> during arousal</li>
+          <li><strong>Sleep 7+ hours</strong> for hormone health</li>
+          <li><strong>Long foreplay</strong> reduces overall pressure</li>
+          <li><strong>Be patient</strong> — 8 weeks minimum to see change</li>
+        </ul>
+      </div>
+      <div class="rule-box no">
+        <h4>AVOID THESE TRAPS</h4>
+        <ul>
+          <li><strong>Watching porn while practising</strong> — defeats the purpose</li>
+          <li><strong>Numbing creams / desensitizing sprays</strong> — treat symptom, not cause</li>
+          <li><strong>Quick masturbation habits</strong> — trains rapid response</li>
+          <li><strong>Over-doing Kegels</strong> — causes pelvic floor tension (worse than weakness)</li>
+          <li><strong>Comparing yourself to porn</strong> — porn is acted, edited, fake</li>
+          <li><strong>Skipping breath work</strong> — it's the secret weapon</li>
+          <li><strong>Jelqing or extreme stretching</strong> — risk of injury, no real benefit</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Safety callout -->
+    <div class="callout reveal" style="background:transparent;border-left-color:var(--text-muted)">
+      <h4 style="color:var(--text)">SAFETY NOTE</h4>
+      <p>If anything causes <strong>pain, bleeding, swelling, or persistent change in shape</strong> — stop immediately and see a doctor. These exercises are gentle by design. There's no "no pain, no gain" here. Less is more, consistency matters more than intensity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COOL DOWN ============ -->
+<section id="cooldown">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 09</div>
+      <div class="sec-title">COOL<br>DOWN</div>
+      <div class="sec-meta">5–10 MIN / STATIC<br>EVERY SESSION</div>
+    </div>
+
+    <p class="sec-intro reveal">This is where recovery starts. <strong>Static holds now</strong> (unlike warmup). Breathe deep — 4 sec in, 6 sec out. Use your mat.</p>
+
+    <div class="ex-grid reveal">
+      <div class="card"><div class="num">CD/01</div><div class="name">Child's Pose</div><div class="tag">Hips · Spine</div><div class="desc">Kneel, sit back on heels, arms extend forward. Resets the nervous system.</div><div class="meta"><span>60 S</span></div></div>
+      <div class="card"><div class="num">CD/02</div><div class="name">Cat–Cow</div><div class="tag">Spine mobility</div><div class="desc">Slower than in warmup. Find every segment of the spine.</div><div class="meta"><span>10 REPS</span></div></div>
+      <div class="card"><div class="num">CD/03</div><div class="name">Downward Dog</div><div class="tag">Hamstrings · Shoulders</div><div class="desc">Press heels toward floor, hips high. Breathe through tight spots.</div><div class="meta"><span>45 S</span></div></div>
+      <div class="card"><div class="num">CD/04</div><div class="name">Cobra Stretch</div><div class="tag">Abs · Chest</div><div class="desc">Prone, palms under shoulders, press chest up. Opens abs and hip flexors.</div><div class="meta"><span>30 S</span></div></div>
+      <div class="card"><div class="num">CD/05</div><div class="name">Pigeon Pose</div><div class="tag">Hips · Glutes</div><div class="desc">One shin forward, other leg back. Lean forward. Deep glute release.</div><div class="meta"><span>60 S/side</span></div></div>
+      <div class="card"><div class="num">CD/06</div><div class="name">Hip Flexor Stretch</div><div class="tag">Sedentary killer</div><div class="desc">Lunge position, back knee down, push hips forward. Fixes desk-bound hips.</div><div class="meta"><span>45 S/side</span></div></div>
+      <div class="card"><div class="num">CD/07</div><div class="name">Seated Hamstring</div><div class="tag">Posterior chain</div><div class="desc">Seated, one leg extended, reach for toes. Don't round the back.</div><div class="meta"><span>45 S/leg</span></div></div>
+      <div class="card"><div class="num">CD/08</div><div class="name">Quad Stretch</div><div class="tag">Front thigh</div><div class="desc">Standing, grab ankle behind you. Use wall for balance. Knees together.</div><div class="meta"><span>30 S/leg</span></div></div>
+      <div class="card"><div class="num">CD/09</div><div class="name">Butterfly Stretch</div><div class="tag">Inner thighs</div><div class="desc">Seated, soles together, gently press knees down. Breathe into the tension.</div><div class="meta"><span>60 S</span></div></div>
+      <div class="card"><div class="num">CD/10</div><div class="name">Figure 4 Stretch</div><div class="tag">Glute · Piriformis</div><div class="desc">On back, ankle on opposite knee, pull toward chest. Unknots tight glutes.</div><div class="meta"><span>45 S/side</span></div></div>
+      <div class="card"><div class="num">CD/11</div><div class="name">Spinal Twist</div><div class="tag">Lower back</div><div class="desc">Lying, knees to one side, head to other. Feel the release along the spine.</div><div class="meta"><span>45 S/side</span></div></div>
+      <div class="card"><div class="num">CD/12</div><div class="name">Happy Baby</div><div class="tag">Hips · Lower back</div><div class="desc">On back, grab outer feet, rock gently. Decompresses the lower spine.</div><div class="meta"><span>45 S</span></div></div>
+      <div class="card"><div class="num">CD/13</div><div class="name">Chest Doorway Stretch</div><div class="tag">Posture fix</div><div class="desc">Forearm on doorframe, step through. Opens tight pecs from phone/desk use.</div><div class="meta"><span>30 S/side</span></div></div>
+      <div class="card"><div class="num">CD/14</div><div class="name">Cross-Body Shoulder</div><div class="tag">Rear delt</div><div class="desc">Pull one arm across chest with other. Classic post-push stretch.</div><div class="meta"><span>20 S/side</span></div></div>
+      <div class="card"><div class="num">CD/15</div><div class="name">Overhead Tricep</div><div class="tag">Triceps · Lats</div><div class="desc">Bend elbow overhead, other hand pulls elbow across and down.</div><div class="meta"><span>20 S/side</span></div></div>
+      <div class="card"><div class="num">CD/16</div><div class="name">Wall Calf Stretch</div><div class="tag">Calves · Achilles</div><div class="desc">Hands on wall, one foot back, heel down. Bend knee slightly for soleus.</div><div class="meta"><span>30 S/side</span></div></div>
+      <div class="card"><div class="num">CD/17</div><div class="name">Neck Stretches</div><div class="tag">Traps</div><div class="desc">Ear toward shoulder, gentle hand assist. Slow. No forcing.</div><div class="meta"><span>20 S/side</span></div></div>
+      <div class="card"><div class="num">CD/18</div><div class="name">Savasana</div><div class="tag">Nervous system</div><div class="desc">Lie flat, arms wide, eyes closed. Breathe. 3–5 min of this changes recovery speed.</div><div class="meta"><span>3 MIN</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRINCIPLES ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 10</div>
+      <div class="sec-title">RULES TO<br>LIVE BY</div>
+      <div class="sec-meta">NON-NEGOTIABLE<br>12 WEEKS</div>
+    </div>
+
+    <div class="principles reveal">
+      <div class="principle"><span class="principle-num">01</span><h3>PROTEIN BEFORE CARBS</h3><p>Every meal. 130–150g daily. Lean on paneer, tofu, soy chunks, dal, curd. Miss this and you lose muscle along with fat.</p></div>
+      <div class="principle"><span class="principle-num">02</span><h3>SLEEP IS TRAINING</h3><p>Under 7 hours raises cortisol → stores belly fat → kills gym progress. Phone out of bedroom. Same sleep and wake time daily.</p></div>
+      <div class="principle"><span class="principle-num">03</span><h3>8K STEPS MINIMUM</h3><p>Workouts aren't enough on their own. A desk job + workouts + no walking = slow progress. Walk 15 min after every meal if you can.</p></div>
+      <div class="principle"><span class="principle-num">04</span><h3>PROGRESSIVE OVERLOAD</h3><p>Every 2 weeks add ONE: more reps, more sets, less rest, more load in the backpack, harder variation. Just one. Never all at once.</p></div>
+      <div class="principle"><span class="principle-num">05</span><h3>NO LIQUID CALORIES</h3><p>No sugar tea, no soft drinks, no juice. Water, black coffee, plain green tea. This one rule alone can drop 1–2 kg in 4 weeks.</p></div>
+      <div class="principle"><span class="principle-num">06</span><h3>SHOW UP TIRED</h3><p>The days you don't want to are the most important. A 60% session beats a skipped session. Do the warmup. If you still hate it after, go home. You won't.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>// About this plan</h4>
+        <p>Built for Nithilan — a returning lifter going home-only with a yoga mat, a sturdy chair, and a backpack of books. Vegetarian (no meat, fish, egg). 12-week protocol targeting belly fat reduction without sacrificing muscle.</p>
+        <p style="margin-top:14px">Adjust for your body. Listen to it. Track weekly, not daily. The plan that you actually follow beats the perfect plan you don't.</p>
+      </div>
+      <div>
+        <h4>// Quick Jump</h4>
+        <ul>
+          <li><a href="#warmup">Warmup</a></li>
+          <li><a href="#cardio">Cardio &amp; HIIT</a></li>
+          <li><a href="#library">Exercise Library</a></li>
+          <li><a href="#schedule">Weekly Schedule</a></li>
+          <li><a href="#diet">Diet Blueprint</a></li>
+          <li><a href="#fasting">Intermittent Fasting</a></li>
+          <li><a href="#vitality">Vitality &amp; Pelvic Power</a></li>
+          <li><a href="#stamina">Stamina &amp; Endurance</a></li>
+          <li><a href="#cooldown">Cool Down</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>// Check-in</h4>
+        <ul>
+          <li>Weigh-in weekly · same day, same time</li>
+          <li>Waist tape every 2 weeks</li>
+          <li>Photos every 4 weeks</li>
+          <li>Log every workout</li>
+          <li>Review plan every 4 weeks</li>
+          <li>If stuck for 4 weeks → cut 150 kcal</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>// NITHILAN'S ARSENAL / v1.1</div>
+      <div>DO THE WORK</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Theme toggle with localStorage persistence
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const savedTheme = localStorage.getItem('theme') || 'light';
+root.setAttribute('data-theme', savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const current = root.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+reveals.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
